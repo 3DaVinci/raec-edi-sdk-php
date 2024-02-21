@@ -1,0 +1,38 @@
+{
+  "name": "3davinci/raec-edi-sdk-php",
+  "minimum-stability": "stable",
+  "version": "1.0.1",
+  "description": "RAEC EDI service SDK for PHP - Use RAEC EDI Service in your PHP project",
+  "keywords": ["raec","edi","sdk"],
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "3DaVinci",
+      "homepage": "https://3davinci.ru"
+    },
+    {
+      "name": "Morozov Andrey",
+      "email": "andrey@3davinci.ru"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "ext-json": "*",
+    "psr/http-message": "^2.0",
+    "symfony/http-client": "^6.0|^7.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10"
+  },
+  "autoload": {
+    "psr-4": {
+      "RaecEdiSDK\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RaecEdiSDK\\Test\\": "tests/"
+    }
+  }
+}

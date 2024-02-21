@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  php:
+    container_name: raec-edi-sdk-php
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ../:/srv/raec-edi-sdk-php
+    working_dir: /srv/raec-edi-sdk-php
+
