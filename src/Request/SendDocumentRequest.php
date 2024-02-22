@@ -19,7 +19,8 @@ class SendDocumentRequest extends AbstractRequest implements RequestInterface
         return $this->sendRequest(
             method: 'POST',
             endpoint: self::ENDPOINT,
-            requestData: $this->getRequestData());
+            requestData: $this->getRequestData()
+        );
     }
 
     public function setMessage(MessageInterface $message): void

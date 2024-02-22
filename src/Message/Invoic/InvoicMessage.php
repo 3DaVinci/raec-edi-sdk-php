@@ -1,0 +1,278 @@
+<?php
+
+declare(strict_types=1);
+
+
+namespace RaecEdiSDK\Message\Invoic;
+
+use DateTimeImmutable;
+use RaecEdiSDK\Message\AbstractMessage;
+use RaecEdiSDK\Message\MessageInterface;
+use RaecEdiSDK\Message\ObjectSerializeTrait;
+use JsonSerializable;
+use RaecEdiSDK\Utils;
+
+class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSerializable
+{
+    use ObjectSerializeTrait;
+
+    protected string $updNumber;
+
+    protected DateTimeImmutable $updDate;
+
+    protected string $sfNumber;
+
+    protected DateTimeImmutable $sfDate;
+
+    protected string $invoiceNumber;
+
+    protected DateTimeImmutable $invoiceDate;
+
+    protected ?string $ttnNumber = null;
+
+    protected ?DateTimeImmutable $ttnDate = null;
+
+    protected string $shipTo;
+
+    protected string $shipFrom;
+
+    protected ?string $shipFromStorageName = null;
+
+    protected DateTimeImmutable $supplierEstimatedDeliveryDate;
+
+    protected string $supplierInn;
+
+    protected string $supplierKpp;
+
+    protected ?string $shipperInn = null;
+
+    protected ?string $shipperKpp = null;
+
+    protected string $buyerInn;
+
+    protected string $buyerKpp;
+
+    protected ?string $consigneeInn = null;
+
+    protected ?string $consigneeKpp = null;
+
+    protected string $currencyIsoCode;
+
+    protected ?string $transportCompanyInn = null;
+
+    protected ?string $trackingNumber = null;
+
+    protected DateTimeImmutable $dateOfPayment;
+
+    protected ?bool $paidByFactoring = null;
+
+    public function __construct(
+        string $supplierGLN,
+        string $buyerGLN,
+        string $updNumber,
+        DateTimeImmutable $updDate,
+        string $sfNumber,
+        DateTimeImmutable $sfDate,
+        string $invoiceNumber,
+        DateTimeImmutable $invoiceDate,
+        string $shipTo,
+        string $shipFrom,
+        DateTimeImmutable $supplierEstimatedDeliveryDate,
+        string $supplierInn,
+        string $supplierKpp,
+        string $buyerInn,
+        string $buyerKpp,
+        string $currencyIsoCode,
+        DateTimeImmutable $dateOfPayment
+    )
+    {
+        $this->updNumber = $updNumber;
+        $this->updDate = $updDate;
+        $this->sfNumber = $sfNumber;
+        $this->sfDate = $sfDate;
+        $this->invoiceNumber = $invoiceNumber;
+        $this->invoiceDate = $invoiceDate;
+        $this->shipTo = $shipTo;
+        $this->shipFrom = $shipFrom;
+        $this->supplierEstimatedDeliveryDate = $supplierEstimatedDeliveryDate;
+        $this->supplierInn = $supplierInn;
+        $this->supplierKpp = $supplierKpp;
+        $this->buyerInn = $buyerInn;
+        $this->buyerKpp = $buyerKpp;
+        $this->currencyIsoCode = $currencyIsoCode;
+        $this->dateOfPayment = $dateOfPayment;
+
+        parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN);
+    }
+
+    public function getUpdNumber(): string
+    {
+        return $this->updNumber;
+    }
+
+    public function getUpdDate(): DateTimeImmutable
+    {
+        return $this->updDate;
+    }
+
+    public function getSfNumber(): string
+    {
+        return $this->sfNumber;
+    }
+
+    public function getSfDate(): DateTimeImmutable
+    {
+        return $this->sfDate;
+    }
+
+    public function getInvoiceNumber(): string
+    {
+        return $this->invoiceNumber;
+    }
+
+    public function getInvoiceDate(): DateTimeImmutable
+    {
+        return $this->invoiceDate;
+    }
+
+    public function getTtnNumber(): ?string
+    {
+        return $this->ttnNumber;
+    }
+
+    public function getTtnDate(): ?DateTimeImmutable
+    {
+        return $this->ttnDate;
+    }
+
+    public function getShipTo(): string
+    {
+        return $this->shipTo;
+    }
+
+    public function getShipFrom(): string
+    {
+        return $this->shipFrom;
+    }
+
+    public function getShipFromStorageName(): ?string
+    {
+        return $this->shipFromStorageName;
+    }
+
+    public function getSupplierEstimatedDeliveryDate(): DateTimeImmutable
+    {
+        return $this->supplierEstimatedDeliveryDate;
+    }
+
+    public function getSupplierInn(): string
+    {
+        return $this->supplierInn;
+    }
+
+    public function getSupplierKpp(): string
+    {
+        return $this->supplierKpp;
+    }
+
+    public function getShipperInn(): ?string
+    {
+        return $this->shipperInn;
+    }
+
+    public function getShipperKpp(): ?string
+    {
+        return $this->shipperKpp;
+    }
+
+    public function getBuyerInn(): string
+    {
+        return $this->buyerInn;
+    }
+
+    public function getBuyerKpp(): string
+    {
+        return $this->buyerKpp;
+    }
+
+    public function getConsigneeInn(): ?string
+    {
+        return $this->consigneeInn;
+    }
+
+    public function getConsigneeKpp(): ?string
+    {
+        return $this->consigneeKpp;
+    }
+
+    public function getCurrencyIsoCode(): string
+    {
+        return $this->currencyIsoCode;
+    }
+
+    public function getTransportCompanyInn(): ?string
+    {
+        return $this->transportCompanyInn;
+    }
+
+    public function getTrackingNumber(): ?string
+    {
+        return $this->trackingNumber;
+    }
+
+    public function getDateOfPayment(): DateTimeImmutable
+    {
+        return $this->dateOfPayment;
+    }
+
+    public function getPaidByFactoring(): ?bool
+    {
+        return $this->paidByFactoring;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return void
+     */
+    public function populate(array $data): void
+    {
+        $stringProperties = [
+            'shipFromStorageName',
+            'shipperInn',
+            'shipperKpp',
+            'consigneeInn',
+            'consigneeKpp',
+            'transportCompanyInn',
+            'trackingNumber',
+        ];
+
+        foreach ($stringProperties as $property) {
+            if (isset($data[$property]) && is_scalar($data[$property])) {
+                $this->$property = (string) $data[$property];
+            }
+        }
+
+        if (isset($data['paidByFactoring'])) {
+            $this->buyerCreationDateTime = (bool) $data['paidByFactoring'];
+        }
+    }
+
+    public function jsonSerialize(): array
+    {
+        $data = $this->objectToArray();
+        $properties = [
+            'updDate',
+            'sfDate',
+            'invoiceDate',
+            'supplierEstimatedDeliveryDate',
+            'dateOfPayment'
+        ];
+        foreach ($properties as $propertyName) {
+            if ($this->$propertyName) {
+                $data[$propertyName] = Utils::dateToString($this->$propertyName);
+            }
+        }
+
+        return $data;
+    }
+}

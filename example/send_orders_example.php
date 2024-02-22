@@ -12,7 +12,7 @@ use RaecEdiSDK\Message\Orders\OrdersMessage;
 use RaecEdiSDK\RaecEdiClient;
 use RaecEdiSDK\Response\SendDocumentResponse;
 
-require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 
 $ordersMessage = new OrdersMessage(
@@ -42,7 +42,7 @@ $raecEdiClient = new RaecEdiClient(
 );
 
 try {
-    /** @var SendDocumentResponse $response */
+    /** @var SendDocumentResponse $responseDocument */
     $responseDocument = $raecEdiClient->sendDocument($ordersMessage);
 } catch (AuthenticationException | EdiClientException | ValidateRequestException $e) {
     die(sprintf('Exception "%s" thrown', get_class($e)));

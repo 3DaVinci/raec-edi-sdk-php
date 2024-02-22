@@ -82,21 +82,9 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         return $this->buyerLineNumber;
     }
 
-    public function setBuyerLineNumber(?string $buyerLineNumber): OrdersItem
-    {
-        $this->buyerLineNumber = $buyerLineNumber;
-        return $this;
-    }
-
     public function getManufacturerCode(): ?string
     {
         return $this->manufacturerCode;
-    }
-
-    public function setManufacturerCode(?string $manufacturerCode): OrdersItem
-    {
-        $this->manufacturerCode = $manufacturerCode;
-        return $this;
     }
 
     public function getBrandCode(): ?string
@@ -104,21 +92,9 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         return $this->brandCode;
     }
 
-    public function setBrandCode(?string $brandCode): OrdersItem
-    {
-        $this->brandCode = $brandCode;
-        return $this;
-    }
-
     public function getBrandName(): ?string
     {
         return $this->brandName;
-    }
-
-    public function setBrandName(?string $brandName): OrdersItem
-    {
-        $this->brandName = $brandName;
-        return $this;
     }
 
     public function getRaecId(): ?string
@@ -126,21 +102,30 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         return $this->raecId;
     }
 
-    public function setRaecId(?string $raecId): OrdersItem
-    {
-        $this->raecId = $raecId;
-        return $this;
-    }
-
     public function getBuyerRequestedDeliveryDate(): ?DateTimeImmutable
     {
         return $this->buyerRequestedDeliveryDate;
     }
 
-    public function setBuyerRequestedDeliveryDate(?DateTimeImmutable $buyerRequestedDeliveryDate): OrdersItem
+    /**
+     * @param array<string, mixed> $data
+     * @return void
+     */
+    public function populate(array $data): void
     {
-        $this->buyerRequestedDeliveryDate = $buyerRequestedDeliveryDate;
-        return $this;
+        $stringProperties = [
+            'buyerLineNumber',
+            'manufacturerCode',
+            'brandCode',
+            'brandName',
+            'raecId',
+        ];
+
+        foreach ($stringProperties as $property) {
+            if (isset($data[$property]) && is_scalar($data[$property])) {
+                $this->$property = (string) $data[$property];
+            }
+        }
     }
 
     public function jsonSerialize(): mixed

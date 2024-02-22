@@ -9,8 +9,12 @@ use RaecEdiSDK\Exception\AuthenticationException;
 use RaecEdiSDK\Exception\EdiClientException;
 use RaecEdiSDK\Exception\ValidateRequestException;
 use RaecEdiSDK\Message\MessageInterface;
+use RaecEdiSDK\Request\GetDocumentRequest;
+use RaecEdiSDK\Request\ReceiveDocumentsRequest;
 use RaecEdiSDK\Request\RequestInterface;
 use RaecEdiSDK\Request\SendDocumentRequest;
+use RaecEdiSDK\Response\GetDocumentResponse;
+use RaecEdiSDK\Response\ReceiveDocumentsResponse;
 use RaecEdiSDK\Response\ResponseInterface;
 use RaecEdiSDK\Response\SendDocumentResponse;
 
@@ -42,6 +46,17 @@ class RaecEdiClient
         ]);
     }
 
+    public function getDocument(string $id): ResponseInterface
+    {
+        $request = $this->createRequest(
+            GetDocumentRequest::class,
+            GetDocumentResponse::class,
+            ['id' => $id]
+        );
+
+        return $request->send();
+    }
+
     /**
      * @param MessageInterface $message
      * @return ResponseInterface
@@ -55,6 +70,26 @@ class RaecEdiClient
             SendDocumentRequest::class,
             SendDocumentResponse::class,
             ['message' => $message]
+        );
+
+        return $request->send();
+    }
+
+    /**
+     * @param int $maxResults
+     * @return ResponseInterface
+     * @throws AuthenticationException
+     * @throws EdiClientException
+     * @throws ValidateRequestException
+     */
+    public function getDocuments(
+        int $maxResults = ReceiveDocumentsRequest::MAX_RESULTS_DEFAULT_VALUE
+    ): ResponseInterface
+    {
+        $request = $this->createRequest(
+            ReceiveDocumentsRequest::class,
+            ReceiveDocumentsResponse::class,
+            ['maxResults' => $maxResults]
         );
 
         return $request->send();
