@@ -52,6 +52,42 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         $this->buyerMultiplicity = $buyerMultiplicity;
     }
 
+    public function setBuyerLineNumber(?string $buyerLineNumber): OrdersItem
+    {
+        $this->buyerLineNumber = $buyerLineNumber;
+        return $this;
+    }
+
+    public function setManufacturerCode(?string $manufacturerCode): OrdersItem
+    {
+        $this->manufacturerCode = $manufacturerCode;
+        return $this;
+    }
+
+    public function setBrandCode(?string $brandCode): OrdersItem
+    {
+        $this->brandCode = $brandCode;
+        return $this;
+    }
+
+    public function setBrandName(?string $brandName): OrdersItem
+    {
+        $this->brandName = $brandName;
+        return $this;
+    }
+
+    public function setRaecId(?string $raecId): OrdersItem
+    {
+        $this->raecId = $raecId;
+        return $this;
+    }
+
+    public function setBuyerRequestedDeliveryDate(?DateTimeImmutable $buyerRequestedDeliveryDate): OrdersItem
+    {
+        $this->buyerRequestedDeliveryDate = $buyerRequestedDeliveryDate;
+        return $this;
+    }
+
     public function getInternalSupplierCode(): string
     {
         return $this->internalSupplierCode;

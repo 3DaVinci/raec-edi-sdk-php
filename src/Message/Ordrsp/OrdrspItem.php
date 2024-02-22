@@ -76,6 +76,90 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         $this->vatRate = $vatRate;
     }
 
+    public function setBuyerLineNumber(?string $buyerLineNumber): OrdrspItem
+    {
+        $this->buyerLineNumber = $buyerLineNumber;
+        return $this;
+    }
+
+    public function setSupplierLineNumber(?string $supplierLineNumber): OrdrspItem
+    {
+        $this->supplierLineNumber = $supplierLineNumber;
+        return $this;
+    }
+
+    public function setManufacturerCode(?string $manufacturerCode): OrdrspItem
+    {
+        $this->manufacturerCode = $manufacturerCode;
+        return $this;
+    }
+
+    public function setBrandCode(?string $brandCode): OrdrspItem
+    {
+        $this->brandCode = $brandCode;
+        return $this;
+    }
+
+    public function setBrandName(?string $brandName): OrdrspItem
+    {
+        $this->brandName = $brandName;
+        return $this;
+    }
+
+    public function setRaecId(?string $raecId): OrdrspItem
+    {
+        $this->raecId = $raecId;
+        return $this;
+    }
+
+    public function setSupplierProductName(?string $supplierProductName): OrdrspItem
+    {
+        $this->supplierProductName = $supplierProductName;
+        return $this;
+    }
+
+    public function setVatAmount(?float $vatAmount): OrdrspItem
+    {
+        $this->vatAmount = $vatAmount;
+        return $this;
+    }
+
+    public function setSupplierEstimatedDeliveryDate(?DateTimeImmutable $supplierEstimatedDeliveryDate): OrdrspItem
+    {
+        $this->supplierEstimatedDeliveryDate = $supplierEstimatedDeliveryDate;
+        return $this;
+    }
+
+    public function setDividedIntoSeveralDeliveries(?string $dividedIntoSeveralDeliveries): OrdrspItem
+    {
+        $this->dividedIntoSeveralDeliveries = $dividedIntoSeveralDeliveries;
+        return $this;
+    }
+
+    public function setSupplierLineComment(?string $supplierLineComment): OrdrspItem
+    {
+        $this->supplierLineComment = $supplierLineComment;
+        return $this;
+    }
+
+    public function setTotalNetAmount(?string $totalNetAmount): OrdrspItem
+    {
+        $this->totalNetAmount = $totalNetAmount;
+        return $this;
+    }
+
+    public function setTotalNetAmountWithVat(?float $totalNetAmountWithVat): OrdrspItem
+    {
+        $this->totalNetAmountWithVat = $totalNetAmountWithVat;
+        return $this;
+    }
+
+    public function setTotalVatAmount(?float $totalVatAmount): OrdrspItem
+    {
+        $this->totalVatAmount = $totalVatAmount;
+        return $this;
+    }
+
     public function getBuyerLineNumber(): ?string
     {
         return $this->buyerLineNumber;

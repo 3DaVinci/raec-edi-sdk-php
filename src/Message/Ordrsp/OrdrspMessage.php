@@ -61,6 +61,78 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         parent::__construct(self::TYPE_ORDRSP, $supplierGLN, $buyerGLN);
     }
 
+    public function setBuyerOrderNumber(?string $buyerOrderNumber): OrdrspMessage
+    {
+        $this->buyerOrderNumber = $buyerOrderNumber;
+        return $this;
+    }
+
+    public function setBuyerCreationDateTime(?DateTimeImmutable $buyerCreationDateTime): OrdrspMessage
+    {
+        $this->buyerCreationDateTime = $buyerCreationDateTime;
+        return $this;
+    }
+
+    public function setShipFrom(?string $shipFrom): OrdrspMessage
+    {
+        $this->shipFrom = $shipFrom;
+        return $this;
+    }
+
+    public function setSelfDelivery(?string $selfDelivery): OrdrspMessage
+    {
+        $this->selfDelivery = $selfDelivery;
+        return $this;
+    }
+
+    public function setPickupPointAddress(?string $pickupPointAddress): OrdrspMessage
+    {
+        $this->pickupPointAddress = $pickupPointAddress;
+        return $this;
+    }
+
+    public function setOrderType(?string $orderType): OrdrspMessage
+    {
+        $this->orderType = $orderType;
+        return $this;
+    }
+
+    public function setProjectNumber(?string $projectNumber): OrdrspMessage
+    {
+        $this->projectNumber = $projectNumber;
+        return $this;
+    }
+
+    public function setContractNumber(?string $contractNumber): OrdrspMessage
+    {
+        $this->contractNumber = $contractNumber;
+        return $this;
+    }
+
+    public function setShipmentAfterCompleteSet(?string $shipmentAfterCompleteSet): OrdrspMessage
+    {
+        $this->shipmentAfterCompleteSet = $shipmentAfterCompleteSet;
+        return $this;
+    }
+
+    public function setCombineShipmentWithOtherOrders(?string $combineShipmentWithOtherOrders): OrdrspMessage
+    {
+        $this->combineShipmentWithOtherOrders = $combineShipmentWithOtherOrders;
+        return $this;
+    }
+
+    public function setBuyerComment(?string $buyerComment): OrdrspMessage
+    {
+        $this->buyerComment = $buyerComment;
+        return $this;
+    }
+
+    public function setSupplierComment(?string $supplierComment): OrdrspMessage
+    {
+        $this->supplierComment = $supplierComment;
+        return $this;
+    }
+
     public function getSupplierOrderNumber(): string
     {
         return $this->supplierOrderNumber;

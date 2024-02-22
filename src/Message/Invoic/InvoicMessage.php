@@ -105,6 +105,66 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN);
     }
 
+    public function setTtnNumber(?string $ttnNumber): InvoicMessage
+    {
+        $this->ttnNumber = $ttnNumber;
+        return $this;
+    }
+
+    public function setTtnDate(?DateTimeImmutable $ttnDate): InvoicMessage
+    {
+        $this->ttnDate = $ttnDate;
+        return $this;
+    }
+
+    public function setShipFromStorageName(?string $shipFromStorageName): InvoicMessage
+    {
+        $this->shipFromStorageName = $shipFromStorageName;
+        return $this;
+    }
+
+    public function setShipperInn(?string $shipperInn): InvoicMessage
+    {
+        $this->shipperInn = $shipperInn;
+        return $this;
+    }
+
+    public function setShipperKpp(?string $shipperKpp): InvoicMessage
+    {
+        $this->shipperKpp = $shipperKpp;
+        return $this;
+    }
+
+    public function setConsigneeInn(?string $consigneeInn): InvoicMessage
+    {
+        $this->consigneeInn = $consigneeInn;
+        return $this;
+    }
+
+    public function setConsigneeKpp(?string $consigneeKpp): InvoicMessage
+    {
+        $this->consigneeKpp = $consigneeKpp;
+        return $this;
+    }
+
+    public function setTransportCompanyInn(?string $transportCompanyInn): InvoicMessage
+    {
+        $this->transportCompanyInn = $transportCompanyInn;
+        return $this;
+    }
+
+    public function setTrackingNumber(?string $trackingNumber): InvoicMessage
+    {
+        $this->trackingNumber = $trackingNumber;
+        return $this;
+    }
+
+    public function setPaidByFactoring(?bool $paidByFactoring): InvoicMessage
+    {
+        $this->paidByFactoring = $paidByFactoring;
+        return $this;
+    }
+
     public function getUpdNumber(): string
     {
         return $this->updNumber;

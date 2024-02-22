@@ -55,6 +55,60 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
         parent::__construct(self::TYPE_ORDERS, $supplierGLN, $buyerGLN);
     }
 
+    public function setShipFrom(?string $shipFrom): OrdersMessage
+    {
+        $this->shipFrom = $shipFrom;
+        return $this;
+    }
+
+    public function setSelfDelivery(?bool $selfDelivery): OrdersMessage
+    {
+        $this->selfDelivery = $selfDelivery;
+        return $this;
+    }
+
+    public function setPickupPointAddress(?string $pickupPointAddress): OrdersMessage
+    {
+        $this->pickupPointAddress = $pickupPointAddress;
+        return $this;
+    }
+
+    public function setOrderType(?string $orderType): OrdersMessage
+    {
+        $this->orderType = $orderType;
+        return $this;
+    }
+
+    public function setProjectNumber(?string $projectNumber): OrdersMessage
+    {
+        $this->projectNumber = $projectNumber;
+        return $this;
+    }
+
+    public function setContractNumber(?string $contractNumber): OrdersMessage
+    {
+        $this->contractNumber = $contractNumber;
+        return $this;
+    }
+
+    public function setShipmentAfterCompleteSet(?bool $shipmentAfterCompleteSet): OrdersMessage
+    {
+        $this->shipmentAfterCompleteSet = $shipmentAfterCompleteSet;
+        return $this;
+    }
+
+    public function setCombineShipmentWithOtherOrders(?bool $combineShipmentWithOtherOrders): OrdersMessage
+    {
+        $this->combineShipmentWithOtherOrders = $combineShipmentWithOtherOrders;
+        return $this;
+    }
+
+    public function setBuyerComment(?string $buyerComment): OrdersMessage
+    {
+        $this->buyerComment = $buyerComment;
+        return $this;
+    }
+
     public function getBuyerOrderNumber(): string
     {
         return $this->buyerOrderNumber;

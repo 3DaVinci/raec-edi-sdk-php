@@ -84,6 +84,90 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         $this->originalCountryIsoCode = $originalCountryIsoCode;
     }
 
+    public function setBuyerOrderNumber(?string $buyerOrderNumber): InvoicItem
+    {
+        $this->buyerOrderNumber = $buyerOrderNumber;
+        return $this;
+    }
+
+    public function setBuyerCreationDateTime(?DateTimeImmutable $buyerCreationDateTime): InvoicItem
+    {
+        $this->buyerCreationDateTime = $buyerCreationDateTime;
+        return $this;
+    }
+
+    public function setBuyerLineNumber(?string $buyerLineNumber): InvoicItem
+    {
+        $this->buyerLineNumber = $buyerLineNumber;
+        return $this;
+    }
+
+    public function setSupplierLineNumber(?string $supplierLineNumber): InvoicItem
+    {
+        $this->supplierLineNumber = $supplierLineNumber;
+        return $this;
+    }
+
+    public function setManufacturerCode(?string $manufacturerCode): InvoicItem
+    {
+        $this->manufacturerCode = $manufacturerCode;
+        return $this;
+    }
+
+    public function setBrandCode(?string $brandCode): InvoicItem
+    {
+        $this->brandCode = $brandCode;
+        return $this;
+    }
+
+    public function setBrandName(?string $brandName): InvoicItem
+    {
+        $this->brandName = $brandName;
+        return $this;
+    }
+
+    public function setRaecId(?string $raecId): InvoicItem
+    {
+        $this->raecId = $raecId;
+        return $this;
+    }
+
+    public function setSupplierProductName(?string $supplierProductName): InvoicItem
+    {
+        $this->supplierProductName = $supplierProductName;
+        return $this;
+    }
+
+    public function setVatAmount(?float $vatAmount): InvoicItem
+    {
+        $this->vatAmount = $vatAmount;
+        return $this;
+    }
+
+    public function setGtdNumber(?string $gtdNumber): InvoicItem
+    {
+        $this->gtdNumber = $gtdNumber;
+        return $this;
+    }
+
+    public function setSupplierAccountNumber(?string $supplierAccountNumber): InvoicItem
+    {
+        $this->supplierAccountNumber = $supplierAccountNumber;
+        return $this;
+    }
+
+    public function setSupplierAccountDate(?DateTimeImmutable $supplierAccountDate): InvoicItem
+    {
+        $this->supplierAccountDate = $supplierAccountDate;
+        return $this;
+    }
+
+    public function setIdBuyerDepartmentToReceiveDocuments(?string $idBuyerDepartmentToReceiveDocuments): InvoicItem
+    {
+        $this->idBuyerDepartmentToReceiveDocuments = $idBuyerDepartmentToReceiveDocuments;
+        return $this;
+    }
+
     public function getBuyerOrderNumber(): ?string
     {
         return $this->buyerOrderNumber;
