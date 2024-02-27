@@ -7,14 +7,13 @@ namespace RaecEdiSDK\Message\Invoic;
 
 use RaecEdiSDK\Message\MessageFactoryInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
-use RaecEdiSDK\Message\Ordrsp\OrdrspMessage;
 use RaecEdiSDK\Utils;
 
 abstract class InvoicFactory implements MessageFactoryInterface
 {
     /**
      * @param array<string, mixed> $data
-     * @return OrdrspMessage
+     * @return InvoicMessage
      */
     public static function create(array $data): InvoicMessage
     {
@@ -49,6 +48,10 @@ abstract class InvoicFactory implements MessageFactoryInterface
         return $invoicMessage;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     * @return MessageItemInterface
+     */
     public static function createItem(array $data): MessageItemInterface
     {
         $invoicItem = new InvoicItem(

@@ -321,7 +321,11 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         }
     }
 
-    public function jsonSerialize(): mixed
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         $data = $this->objectToArray();
 

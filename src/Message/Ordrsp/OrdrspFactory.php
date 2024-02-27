@@ -36,6 +36,10 @@ abstract class OrdrspFactory implements MessageFactoryInterface
         return $ordrspMessage;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     * @return MessageItemInterface
+     */
     public static function createItem(array $data): MessageItemInterface
     {
         $ordrspItem = new OrdrspItem(

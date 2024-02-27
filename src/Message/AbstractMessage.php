@@ -13,6 +13,9 @@ abstract class AbstractMessage
 
     protected string $buyerGLN;
 
+    /**
+     * @var MessageItemInterface[]
+     */
     protected array $items = [];
 
     /**

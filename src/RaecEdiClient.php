@@ -27,12 +27,19 @@ class RaecEdiClient
 
     private const DEFAULT_TIMEOUT_SEC = 10;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $options = [
         'timeout' => self::DEFAULT_TIMEOUT_SEC
     ];
 
     private HttpClientInterface $httpClient;
 
+    /**
+     * @param Credentials $credentials
+     * @param array<string, mixed> $options
+     */
     public function __construct(
         private Credentials $credentials,
         array $options = []
@@ -98,7 +105,7 @@ class RaecEdiClient
     /**
      * @param string $classRequest
      * @param string $classResponse
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @return RequestInterface
      * @throws AuthenticationException
      * @throws EdiClientException

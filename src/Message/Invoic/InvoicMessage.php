@@ -313,10 +313,13 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         }
 
         if (isset($data['paidByFactoring'])) {
-            $this->buyerCreationDateTime = (bool) $data['paidByFactoring'];
+            $this->paidByFactoring = (bool) $data['paidByFactoring'];
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         $data = $this->objectToArray();

@@ -11,7 +11,7 @@ use RaecEdiSDK\Exception\AuthenticationException;
 use RaecEdiSDK\Exception\EdiClientException;
 use RaecEdiSDK\Exception\ValidateRequestException;
 use RaecEdiSDK\Response\ResponseInterface;
-use Symfony\Component\HttpClient\Exception\ClientException;
+use RuntimeException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class AbstractRequest
@@ -35,7 +35,7 @@ abstract class AbstractRequest
 
     /**
      * @param Credentials $credentials
-     * @param array $parameters
+     * @param array<string, mixed> $parameters
      * @return void
      * @throws AuthenticationException
      */
@@ -56,8 +56,8 @@ abstract class AbstractRequest
     /**
      * @param string $method
      * @param string $endpoint
-     * @param array $queryParameters
-     * @param array $requestData
+     * @param array<string, mixed> $queryParameters
+     * @param array<string, mixed> $requestData
      * @return ResponseInterface
      * @throws EdiClientException
      * @throws ValidateRequestException
@@ -87,7 +87,7 @@ abstract class AbstractRequest
 
         try {
             $httpResponse = $this->httpClient->request($method, $endpoint, $options);
-        } catch (ClientException $e) {
+        } catch (RuntimeException $e) {
             throw new EdiClientException($e->getMessage());
         }
 

@@ -51,7 +51,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     public ?string $supplierLineComment = null;
 
-    public ?string $totalNetAmount = null;
+    public ?float $totalNetAmount = null;
 
     public ?float $totalNetAmountWithVat = null;
 
@@ -142,7 +142,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setTotalNetAmount(?string $totalNetAmount): OrdrspItem
+    public function setTotalNetAmount(?float $totalNetAmount): OrdrspItem
     {
         $this->totalNetAmount = $totalNetAmount;
         return $this;
@@ -250,7 +250,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this->supplierLineComment;
     }
 
-    public function getTotalNetAmount(): ?string
+    public function getTotalNetAmount(): ?float
     {
         return $this->totalNetAmount;
     }
@@ -303,11 +303,14 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         }
 
         if (isset($data['supplierEstimatedDeliveryDate']) && $data['supplierEstimatedDeliveryDate']) {
-            $this->buyerCreationDateTime = Utils::stringToDate($data['supplierEstimatedDeliveryDate']);
+            $this->supplierEstimatedDeliveryDate = Utils::stringToDate($data['supplierEstimatedDeliveryDate']);
         }
     }
 
-    public function jsonSerialize(): mixed
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         $data = $this->objectToArray();
 

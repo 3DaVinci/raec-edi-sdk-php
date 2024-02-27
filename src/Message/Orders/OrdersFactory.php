@@ -36,6 +36,10 @@ abstract class OrdersFactory implements MessageFactoryInterface
         return $ordersMessage;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     * @return MessageItemInterface
+     */
     public static function createItem(array $data): MessageItemInterface
     {
         $orderItem = new OrdersItem(

@@ -202,6 +202,9 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         $data = $this->objectToArray();

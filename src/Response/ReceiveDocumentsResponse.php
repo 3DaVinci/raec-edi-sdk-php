@@ -8,9 +8,14 @@ namespace RaecEdiSDK\Response;
 use DateTime;
 use RaecEdiSDK\Message\Document;
 use RaecEdiSDK\Message\MessageFactory;
+use RaecEdiSDK\Message\MessageInterface;
 
 class ReceiveDocumentsResponse extends AbstractResponse implements ResponseInterface
 {
+    /**
+     * @return iterable|Document[]
+     * @throws \Exception
+     */
     public function getDocuments(): iterable
     {
         if (false === $this->isSuccess() || !isset($this->data['items']) || empty($this->data['items'])) {

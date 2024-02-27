@@ -12,6 +12,11 @@ use RuntimeException;
 
 abstract class MessageFactory
 {
+    /**
+     * @param string $type
+     * @param array<string, mixed> $data
+     * @return MessageInterface
+     */
     public static function create(string $type, array $data): MessageInterface
     {
         return match ($type) {

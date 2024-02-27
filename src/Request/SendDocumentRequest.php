@@ -28,6 +28,9 @@ class SendDocumentRequest extends AbstractRequest implements RequestInterface
         $this->message = $message;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function getRequestData(): array
     {
         assert($this->message instanceof MessageInterface);

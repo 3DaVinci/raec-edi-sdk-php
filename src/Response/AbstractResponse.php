@@ -16,10 +16,17 @@ abstract class AbstractResponse
 
     private string $message;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $errors;
 
     private int $statusCode;
 
+    /**
+     * @param array<string, mixed> $data
+     * @param int $statusCode
+     */
     public function __construct(array $data, int $statusCode)
     {
         $this->data = $data;
@@ -39,6 +46,9 @@ abstract class AbstractResponse
         return $this->message;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getErrors(): array
     {
         return $this->errors;

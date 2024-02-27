@@ -9,5 +9,10 @@ interface RequestInterface
 {
     public function send(): ResponseInterface;
 
+    /**
+     * @param Credentials $credentials
+     * @param array<string, mixed> $parameters
+     * @return void
+     */
     public function initialize(Credentials $credentials, array $parameters): void;
 }
