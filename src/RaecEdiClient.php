@@ -23,7 +23,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RaecEdiClient
 {
-    public const BASE_URI = 'http://10.4.0.217/api/v1/';
+    public const DEFAULT_BASE_URI = 'http://10.4.0.217/api/v1/';
 
     private const DEFAULT_TIMEOUT_SEC = 10;
 
@@ -31,7 +31,8 @@ class RaecEdiClient
      * @var array<string, mixed>
      */
     private array $options = [
-        'timeout' => self::DEFAULT_TIMEOUT_SEC
+        'timeout' => self::DEFAULT_TIMEOUT_SEC,
+        'baseUri' => self::DEFAULT_BASE_URI
     ];
 
     private HttpClientInterface $httpClient;
@@ -47,7 +48,7 @@ class RaecEdiClient
     {
         $this->options = array_merge($this->options, $options);
 
-        $this->httpClient = HttpClient::createForBaseUri(self::BASE_URI, [
+        $this->httpClient = HttpClient::createForBaseUri($this->options['baseUri'], [
             'headers' => ['Content-Type' => 'application/json'],
             'timeout' => $this->options['timeout']
         ]);
