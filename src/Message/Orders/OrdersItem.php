@@ -39,17 +39,29 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
 
     public function __construct(
         string $internalSupplierCode,
-        string $buyerProductName,
-        int $buyerRequestedQuantity,
-        string $buyerUnitOfMeasure,
-        int $buyerMultiplicity
+        int $buyerRequestedQuantity
     )
     {
         $this->internalSupplierCode = $internalSupplierCode;
-        $this->buyerProductName = $buyerProductName;
         $this->buyerRequestedQuantity = $buyerRequestedQuantity;
+    }
+
+    public function setBuyerProductName(string $buyerProductName): OrdersItem
+    {
+        $this->buyerProductName = $buyerProductName;
+        return $this;
+    }
+
+    public function setBuyerUnitOfMeasure(string $buyerUnitOfMeasure): OrdersItem
+    {
         $this->buyerUnitOfMeasure = $buyerUnitOfMeasure;
+        return $this;
+    }
+
+    public function setBuyerMultiplicity(int $buyerMultiplicity): OrdersItem
+    {
         $this->buyerMultiplicity = $buyerMultiplicity;
+        return $this;
     }
 
     public function setBuyerLineNumber(?string $buyerLineNumber): OrdersItem
@@ -150,6 +162,8 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
     public function populate(array $data): void
     {
         $stringProperties = [
+            'buyerProductName',
+            'buyerUnitOfMeasure',
             'buyerLineNumber',
             'manufacturerCode',
             'brandCode',
@@ -161,6 +175,10 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
             if (isset($data[$property]) && is_scalar($data[$property])) {
                 $this->$property = (string) $data[$property];
             }
+        }
+
+        if (isset($data['buyerMultiplicity']) && is_numeric($data['buyerMultiplicity'])) {
+            $this->buyerMultiplicity = (int) $data['buyerMultiplicity'];
         }
     }
 

@@ -25,10 +25,7 @@ $ordersMessage = new OrdersMessage(
 
 $ordersItem = new OrdersItem(
     internalSupplierCode: 'CKK10',
-    buyerProductName: 'IEK Кабель-канал 60х40 \"ЭЛЕКОР\" (18м)',
-    buyerRequestedQuantity: 20,
-    buyerUnitOfMeasure: 'шт',
-    buyerMultiplicity: 1
+    buyerRequestedQuantity: 20
 );
 
 $ordersItem
