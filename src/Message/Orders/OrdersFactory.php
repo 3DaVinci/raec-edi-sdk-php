@@ -45,9 +45,6 @@ abstract class OrdersFactory implements MessageFactoryInterface
         $orderItem = new OrdersItem(
             $data['internalSupplierCode'],
             $data['buyerProductName'],
-            (int) $data['buyerRequestedQuantity'],
-            $data['buyerUnitOfMeasure'],
-            (int) $data['buyerMultiplicity'],
         );
 
         $orderItem->populate($data);
