@@ -35,6 +35,14 @@ abstract class AbstractMessage
         array_push($this->items, $item);
     }
 
+    /**
+     * @return MessageItemInterface[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
     public function getDocumentType(): string
     {
         return $this->documentType;
