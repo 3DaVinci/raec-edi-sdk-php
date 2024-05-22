@@ -15,51 +15,51 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
 
-    private ?string $buyerOrderNumber = null;
+    protected ?string $buyerOrderNumber = null;
 
-    private ?DateTimeImmutable $buyerCreationDateTime = null;
+    protected ?DateTimeImmutable $buyerCreationDateTime = null;
 
-    private string $supplierOrderNumber;
+    protected string $supplierOrderNumber;
 
-    private DateTimeImmutable $supplierCreationDateTime;
+    protected DateTimeImmutable $supplierCreationDateTime;
 
-    private ?string $buyerLineNumber = null;
+    protected ?string $buyerLineNumber = null;
 
-    private ?string $supplierLineNumber = null;
+    protected ?string $supplierLineNumber = null;
 
-    private string $internalSupplierCode;
+    protected string $internalSupplierCode;
 
-    private ?string $manufacturerCode = null;
+    protected ?string $manufacturerCode = null;
 
-    private ?string $brandCode = null;
+    protected ?string $brandCode = null;
 
-    private ?string $brandName = null;
+    protected ?string $brandName = null;
 
-    private ?string $raecId = null;
+    protected ?string $raecId = null;
 
-    private ?string $supplierProductName = null;
+    protected ?string $supplierProductName = null;
 
-    private string $supplierUnitOfMeasure;
+    protected string $supplierUnitOfMeasure;
 
-    private int $supplierConfirmedQuantity;
+    protected int $supplierConfirmedQuantity;
 
-    private float $netAmount;
+    protected float $netAmount;
 
-    private float $netAmountWithVat;
+    protected float $netAmountWithVat;
 
-    private int $vatRate;
+    protected int $vatRate;
 
-    private ?float $vatAmount = null;
+    protected ?float $vatAmount = null;
 
-    private ?string $gtdNumber = null;
+    protected ?string $gtdNumber = null;
 
-    private string $originalCountryIsoCode;
+    protected string $originalCountryIsoCode;
 
-    private ?string $supplierAccountNumber = null;
+    protected ?string $supplierAccountNumber = null;
 
-    private ?DateTimeImmutable $supplierAccountDate = null;
+    protected ?DateTimeImmutable $supplierAccountDate = null;
 
-    private ?string $idBuyerDepartmentToReceiveDocuments = null;
+    protected ?string $idBuyerDepartmentToReceiveDocuments = null;
 
     public function __construct(
         string $supplierOrderNumber,

@@ -15,47 +15,47 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
 
-    public ?string $buyerLineNumber = null;
+    protected ?string $buyerLineNumber = null;
 
-    public ?string $supplierLineNumber = null;
+    protected ?string $supplierLineNumber = null;
 
-    public string $internalSupplierCode;
+    protected string $internalSupplierCode;
 
-    public ?string $manufacturerCode = null;
+    protected ?string $manufacturerCode = null;
 
-    public ?string $brandCode = null;
+    protected ?string $brandCode = null;
 
-    public ?string $brandName = null;
+    protected ?string $brandName = null;
 
-    public ?string $raecId = null;
+    protected ?string $raecId = null;
 
-    public ?string $supplierProductName = null;
+    protected ?string $supplierProductName = null;
 
-    public string $supplierUnitOfMeasure;
+    protected string $supplierUnitOfMeasure;
 
-    public string $supplierMultiplicity;
+    protected string $supplierMultiplicity;
 
-    public int $supplierConfirmedQuantity;
+    protected int $supplierConfirmedQuantity;
 
-    public float $netAmount;
+    protected float $netAmount;
 
-    public float $netAmountWithVat;
+    protected float $netAmountWithVat;
 
-    public int $vatRate;
+    protected int $vatRate;
 
-    public ?float $vatAmount = null;
+    protected ?float $vatAmount = null;
 
-    public ?DateTimeImmutable $supplierEstimatedDeliveryDate = null;
+    protected ?DateTimeImmutable $supplierEstimatedDeliveryDate = null;
 
-    public ?string $dividedIntoSeveralDeliveries = null;
+    protected ?string $dividedIntoSeveralDeliveries = null;
 
-    public ?string $supplierLineComment = null;
+    protected ?string $supplierLineComment = null;
 
-    public ?float $totalNetAmount = null;
+    protected ?float $totalNetAmount = null;
 
-    public ?float $totalNetAmountWithVat = null;
+    protected ?float $totalNetAmountWithVat = null;
 
-    public ?float $totalVatAmount = null;
+    protected ?float $totalVatAmount = null;
 
     public function __construct(
         string $internalSupplierCode,

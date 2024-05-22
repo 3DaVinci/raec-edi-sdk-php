@@ -15,27 +15,27 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
 
-    private string $internalSupplierCode;
+    protected string $internalSupplierCode;
 
-    private string $buyerProductName;
+    protected string $buyerProductName;
 
-    private int $buyerRequestedQuantity;
+    protected int $buyerRequestedQuantity;
 
-    private string $buyerUnitOfMeasure;
+    protected string $buyerUnitOfMeasure;
 
-    private int $buyerMultiplicity;
+    protected int $buyerMultiplicity;
 
-    private ?string $buyerLineNumber = null;
+    protected ?string $buyerLineNumber = null;
 
-    private ?string $manufacturerCode = null;
+    protected ?string $manufacturerCode = null;
 
-    private ?string $brandCode = null;
+    protected ?string $brandCode = null;
 
     private ?string $brandName = null;
 
-    private ?string $raecId = null;
+    protected ?string $raecId = null;
 
-    private ?DateTimeImmutable $buyerRequestedDeliveryDate = null;
+    protected ?DateTimeImmutable $buyerRequestedDeliveryDate = null;
 
     public function __construct(
         string $internalSupplierCode,
