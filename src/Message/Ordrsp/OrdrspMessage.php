@@ -217,13 +217,10 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         $stringProperties = [
             'buyerOrderNumber',
             'shipFrom',
-            'selfDelivery',
             'pickupPointAddress',
             'orderType',
             'projectNumber',
             'contractNumber',
-            'shipmentAfterCompleteSet',
-            'combineShipmentWithOtherOrders',
             'buyerComment',
             'supplierComment',
         ];
@@ -231,6 +228,17 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         foreach ($stringProperties as $property) {
             if (isset($data[$property]) && is_scalar($data[$property])) {
                 $this->$property = (string) $data[$property];
+            }
+        }
+
+        $boolProperties = [
+            'selfDelivery',
+            'shipmentAfterCompleteSet',
+            'combineShipmentWithOtherOrders',
+        ];
+        foreach ($boolProperties as $property) {
+            if (isset($data[$property])) {
+                $this->$property = (bool) $data[$property];
             }
         }
 

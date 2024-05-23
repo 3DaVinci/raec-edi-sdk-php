@@ -297,6 +297,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
     public function populate(array $data): void
     {
         $stringProperties = [
+            'ttnNumber',
             'shipFromStorageName',
             'shipperInn',
             'shipperKpp',
@@ -314,6 +315,10 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
 
         if (isset($data['paidByFactoring'])) {
             $this->paidByFactoring = (bool) $data['paidByFactoring'];
+        }
+
+        if (isset($data['ttnDate']) && $data['ttnDate']) {
+            $this->ttnDate = Utils::stringToDateTime($data['ttnDate']);
         }
     }
 
