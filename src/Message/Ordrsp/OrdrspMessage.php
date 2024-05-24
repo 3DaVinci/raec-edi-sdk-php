@@ -28,7 +28,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $shipFrom = null;
 
-    protected ?string $selfDelivery = null;
+    protected ?bool $selfDelivery = null;
 
     protected ?string $pickupPointAddress = null;
 
@@ -79,7 +79,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
-    public function setSelfDelivery(?string $selfDelivery): OrdrspMessage
+    public function setSelfDelivery(?bool $selfDelivery): OrdrspMessage
     {
         $this->selfDelivery = $selfDelivery;
         return $this;
@@ -163,7 +163,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->shipFrom;
     }
 
-    public function getSelfDelivery(): ?string
+    public function getSelfDelivery(): ?bool
     {
         return $this->selfDelivery;
     }
