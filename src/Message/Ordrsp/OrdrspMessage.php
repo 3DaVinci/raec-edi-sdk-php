@@ -38,9 +38,9 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $contractNumber = null;
 
-    protected ?string $shipmentAfterCompleteSet = null;
+    protected ?bool $shipmentAfterCompleteSet = null;
 
-    protected ?string $combineShipmentWithOtherOrders = null;
+    protected ?bool $combineShipmentWithOtherOrders = null;
 
     protected ?string $buyerComment = null;
 
@@ -109,13 +109,13 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
-    public function setShipmentAfterCompleteSet(?string $shipmentAfterCompleteSet): OrdrspMessage
+    public function setShipmentAfterCompleteSet(?bool $shipmentAfterCompleteSet): OrdrspMessage
     {
         $this->shipmentAfterCompleteSet = $shipmentAfterCompleteSet;
         return $this;
     }
 
-    public function setCombineShipmentWithOtherOrders(?string $combineShipmentWithOtherOrders): OrdrspMessage
+    public function setCombineShipmentWithOtherOrders(?bool $combineShipmentWithOtherOrders): OrdrspMessage
     {
         $this->combineShipmentWithOtherOrders = $combineShipmentWithOtherOrders;
         return $this;
