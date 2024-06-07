@@ -23,7 +23,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     protected ?string $manufacturerCode = null;
 
-    protected ?string $brandCode = null;
+    protected ?int $brandCode = null;
 
     protected ?string $brandName = null;
 
@@ -89,7 +89,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setBrandCode(?string $brandCode): OrdrspItem
+    public function setBrandCode(?int $brandCode): OrdrspItem
     {
         $this->brandCode = $brandCode;
         return $this;
@@ -157,7 +157,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this->manufacturerCode;
     }
 
-    public function getBrandCode(): ?string
+    public function getBrandCode(): ?int
     {
         return $this->brandCode;
     }
@@ -237,7 +237,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             'buyerLineNumber',
             'supplierLineNumber',
             'manufacturerCode',
-            'brandCode',
             'brandName',
             'raecId',
             'supplierProductName',
@@ -257,6 +256,10 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             if (isset($data[$property]) && is_numeric($data[$property])) {
                 $this->$property = (float) $data[$property];
             }
+        }
+
+        if (isset($data['brandCode']) && $data['brandCode']) {
+            $this->brandCode = (int) $data['brandCode'];
         }
 
         if (isset($data['supplierEstimatedDeliveryDate']) && $data['supplierEstimatedDeliveryDate']) {

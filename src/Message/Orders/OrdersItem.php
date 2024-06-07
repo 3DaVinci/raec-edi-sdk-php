@@ -29,7 +29,7 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
 
     protected ?string $manufacturerCode = null;
 
-    protected ?string $brandCode = null;
+    protected ?int $brandCode = null;
 
     private ?string $brandName = null;
 
@@ -76,7 +76,7 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setBrandCode(?string $brandCode): OrdersItem
+    public function setBrandCode(?int $brandCode): OrdersItem
     {
         $this->brandCode = $brandCode;
         return $this;
@@ -135,7 +135,7 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         return $this->manufacturerCode;
     }
 
-    public function getBrandCode(): ?string
+    public function getBrandCode(): ?int
     {
         return $this->brandCode;
     }
@@ -166,7 +166,6 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
             'buyerUnitOfMeasure',
             'buyerLineNumber',
             'manufacturerCode',
-            'brandCode',
             'brandName',
             'raecId',
         ];
@@ -177,8 +176,14 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
             }
         }
 
-        if (isset($data['buyerMultiplicity']) && is_numeric($data['buyerMultiplicity'])) {
-            $this->buyerMultiplicity = (int) $data['buyerMultiplicity'];
+        $intProperties = [
+            'buyerMultiplicity',
+            'brandCode'
+        ];
+        foreach ($intProperties as $property) {
+            if (isset($data[$property]) && is_numeric($data[$property])) {
+                $this->$property = (int) $data[$property];
+            }
         }
     }
 

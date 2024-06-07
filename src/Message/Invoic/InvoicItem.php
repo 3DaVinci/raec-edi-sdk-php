@@ -31,7 +31,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
     protected ?string $manufacturerCode = null;
 
-    protected ?string $brandCode = null;
+    protected ?int $brandCode = null;
 
     protected ?string $brandName = null;
 
@@ -114,7 +114,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setBrandCode(?string $brandCode): InvoicItem
+    public function setBrandCode(?int $brandCode): InvoicItem
     {
         $this->brandCode = $brandCode;
         return $this;
@@ -208,7 +208,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this->manufacturerCode;
     }
 
-    public function getBrandCode(): ?string
+    public function getBrandCode(): ?int
     {
         return $this->brandCode;
     }
@@ -294,7 +294,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
             'buyerLineNumber',
             'supplierLineNumber',
             'manufacturerCode',
-            'brandCode',
             'brandName',
             'raecId',
             'supplierProductName',
@@ -316,6 +315,9 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
             $this->buyerCreationDateTime = Utils::stringToDate($data['supplierAccountDate']);
         }
 
+        if (isset($data['brandCode']) && $data['brandCode']) {
+            $this->brandCode = (int) $data['brandCode'];
+        }
         if (isset($data['vatAmount']) && $data['vatAmount']) {
             $this->vatAmount = (float) $data['vatAmount'];
         }
