@@ -46,6 +46,12 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $supplierComment = null;
 
+    protected ?float $totalNetAmount = null;
+
+    protected ?float $totalNetAmountWithVat = null;
+
+    protected ?float $totalVatAmount = null;
+
     public function __construct(
         string $supplierGLN,
         string $buyerGLN,
@@ -133,6 +139,24 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
+    public function setTotalNetAmount(?float $totalNetAmount): OrdrspMessage
+    {
+        $this->totalNetAmount = $totalNetAmount;
+        return $this;
+    }
+
+    public function setTotalNetAmountWithVat(?float $totalNetAmountWithVat): OrdrspMessage
+    {
+        $this->totalNetAmountWithVat = $totalNetAmountWithVat;
+        return $this;
+    }
+
+    public function setTotalVatAmount(?float $totalVatAmount): OrdrspMessage
+    {
+        $this->totalVatAmount = $totalVatAmount;
+        return $this;
+    }
+
     public function getSupplierOrderNumber(): string
     {
         return $this->supplierOrderNumber;
@@ -208,6 +232,21 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->supplierComment;
     }
 
+    public function getTotalNetAmount(): ?float
+    {
+        return $this->totalNetAmount;
+    }
+
+    public function getTotalNetAmountWithVat(): ?float
+    {
+        return $this->totalNetAmountWithVat;
+    }
+
+    public function getTotalVatAmount(): ?float
+    {
+        return $this->totalVatAmount;
+    }
+
     /**
      * @param array<string, mixed> $data
      * @return void
@@ -239,6 +278,18 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         foreach ($boolProperties as $property) {
             if (isset($data[$property])) {
                 $this->$property = (bool) $data[$property];
+            }
+        }
+
+        $floatProperties = [
+            'totalNetAmount',
+            'totalNetAmountWithVat',
+            'totalVatAmount',
+        ];
+
+        foreach ($floatProperties as $property) {
+            if (isset($data[$property]) && is_numeric($data[$property])) {
+                $this->$property = (float) $data[$property];
             }
         }
 

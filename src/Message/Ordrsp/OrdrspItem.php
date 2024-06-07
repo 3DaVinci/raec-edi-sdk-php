@@ -51,11 +51,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     protected ?string $supplierLineComment = null;
 
-    protected ?float $totalNetAmount = null;
-
-    protected ?float $totalNetAmountWithVat = null;
-
-    protected ?float $totalVatAmount = null;
 
     public function __construct(
         string $internalSupplierCode,
@@ -139,24 +134,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
     public function setSupplierLineComment(?string $supplierLineComment): OrdrspItem
     {
         $this->supplierLineComment = $supplierLineComment;
-        return $this;
-    }
-
-    public function setTotalNetAmount(?float $totalNetAmount): OrdrspItem
-    {
-        $this->totalNetAmount = $totalNetAmount;
-        return $this;
-    }
-
-    public function setTotalNetAmountWithVat(?float $totalNetAmountWithVat): OrdrspItem
-    {
-        $this->totalNetAmountWithVat = $totalNetAmountWithVat;
-        return $this;
-    }
-
-    public function setTotalVatAmount(?float $totalVatAmount): OrdrspItem
-    {
-        $this->totalVatAmount = $totalVatAmount;
         return $this;
     }
 
@@ -250,21 +227,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this->supplierLineComment;
     }
 
-    public function getTotalNetAmount(): ?float
-    {
-        return $this->totalNetAmount;
-    }
-
-    public function getTotalNetAmountWithVat(): ?float
-    {
-        return $this->totalNetAmountWithVat;
-    }
-
-    public function getTotalVatAmount(): ?float
-    {
-        return $this->totalVatAmount;
-    }
-
     /**
      * @param array<string, mixed> $data
      * @return void
@@ -289,12 +251,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             }
         }
 
-        $floatProperties = [
-            'vatAmount',
-            'totalNetAmount',
-            'totalNetAmountWithVat',
-            'totalVatAmount',
-        ];
+        $floatProperties = ['vatAmount'];
 
         foreach ($floatProperties as $property) {
             if (isset($data[$property]) && is_numeric($data[$property])) {
