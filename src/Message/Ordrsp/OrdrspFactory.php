@@ -23,6 +23,7 @@ abstract class OrdrspFactory implements MessageFactoryInterface
             $data['supplierOrderNumber'],
             Utils::stringToDateTime($data['supplierCreationDateTime']),
             $data['shipTo'],
+            $data['currencyIsoCode'],
         );
 
         if ($data['items']) {
