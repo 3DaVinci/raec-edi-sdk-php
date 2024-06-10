@@ -24,7 +24,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $buyerOrderNumber = null;
 
-    protected ?DateTimeImmutable $buyerCreationDateTime = null;
+    protected ?DateTimeImmutable $buyerOrderCreationDateTime = null;
 
     protected ?string $shipFrom = null;
 
@@ -77,9 +77,9 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
-    public function setBuyerCreationDateTime(?DateTimeImmutable $buyerCreationDateTime): OrdrspMessage
+    public function setBuyerOrderCreationDateTime(?DateTimeImmutable $buyerOrderCreationDateTime): OrdrspMessage
     {
-        $this->buyerCreationDateTime = $buyerCreationDateTime;
+        $this->buyerOrderCreationDateTime = $buyerOrderCreationDateTime;
         return $this;
     }
 
@@ -181,9 +181,9 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->buyerOrderNumber;
     }
 
-    public function getBuyerCreationDateTime(): ?DateTimeImmutable
+    public function getBuyerOrderCreationDateTime(): ?DateTimeImmutable
     {
-        return $this->buyerCreationDateTime;
+        return $this->buyerOrderCreationDateTime;
     }
 
     public function getShipFrom(): ?string
@@ -302,8 +302,8 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
             }
         }
 
-        if (isset($data['buyerCreationDateTime']) && $data['buyerCreationDateTime']) {
-            $this->buyerCreationDateTime = Utils::stringToDateTime($data['buyerCreationDateTime']);
+        if (isset($data['buyerOrderCreationDateTime']) && $data['buyerOrderCreationDateTime']) {
+            $this->buyerOrderCreationDateTime = Utils::stringToDateTime($data['buyerOrderCreationDateTime']);
         }
     }
 
@@ -315,8 +315,8 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         $data = $this->objectToArray();
         $data['supplierCreationDateTime'] = Utils::dateTimeToString($this->supplierCreationDateTime);
 
-        if ($this->buyerCreationDateTime) {
-            $data['buyerOrderCreationDateTime'] = Utils::dateTimeToString($this->buyerCreationDateTime);
+        if ($this->buyerOrderCreationDateTime) {
+            $data['buyerOrderCreationDateTime'] = Utils::dateTimeToString($this->buyerOrderCreationDateTime);
         }
 
         return $data;

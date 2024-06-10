@@ -17,7 +17,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
     protected ?string $buyerOrderNumber = null;
 
-    protected ?DateTimeImmutable $buyerCreationDateTime = null;
+    protected ?DateTimeImmutable $buyerOrderCreationDateTime = null;
 
     protected string $supplierOrderNumber;
 
@@ -90,9 +90,9 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setBuyerCreationDateTime(?DateTimeImmutable $buyerCreationDateTime): InvoicItem
+    public function setBuyerOrderCreationDateTime(?DateTimeImmutable $buyerOrderCreationDateTime): InvoicItem
     {
-        $this->buyerCreationDateTime = $buyerCreationDateTime;
+        $this->buyerOrderCreationDateTime = $buyerOrderCreationDateTime;
         return $this;
     }
 
@@ -173,9 +173,9 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this->buyerOrderNumber;
     }
 
-    public function getBuyerCreationDateTime(): ?DateTimeImmutable
+    public function getBuyerOrderCreationDateTime(): ?DateTimeImmutable
     {
-        return $this->buyerCreationDateTime;
+        return $this->buyerOrderCreationDateTime;
     }
 
     public function getSupplierOrderNumber(): string
@@ -308,11 +308,11 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
             }
         }
 
-        if (isset($data['buyerCreationDateTime']) && $data['buyerCreationDateTime']) {
-            $this->buyerCreationDateTime = Utils::stringToDateTime($data['buyerCreationDateTime']);
+        if (isset($data['buyerOrderCreationDateTime']) && $data['buyerOrderCreationDateTime']) {
+            $this->buyerOrderCreationDateTime = Utils::stringToDateTime($data['buyerOrderCreationDateTime']);
         }
         if (isset($data['supplierAccountDate']) && $data['supplierAccountDate']) {
-            $this->buyerCreationDateTime = Utils::stringToDate($data['supplierAccountDate']);
+            $this->buyerOrderCreationDateTime = Utils::stringToDate($data['supplierAccountDate']);
         }
 
         if (isset($data['brandCode']) && $data['brandCode']) {
@@ -331,7 +331,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
     {
         $data = $this->objectToArray();
 
-        $properties = ['buyerCreationDateTime', 'supplierCreationDateTime'];
+        $properties = ['buyerOrderCreationDateTime', 'supplierCreationDateTime'];
         foreach ($properties as $propertyName) {
             if ($this->$propertyName) {
                 $data[$propertyName] = Utils::dateTimeToString($this->$propertyName);
