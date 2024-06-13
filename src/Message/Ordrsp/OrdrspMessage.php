@@ -52,21 +52,19 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?float $totalVatAmount = null;
 
-    protected string $currencyIsoCode;
+    protected ?string $currencyIsoCode = null;
 
     public function __construct(
         string $supplierGLN,
         string $buyerGLN,
         string $supplierOrderNumber,
         DateTimeImmutable $supplierCreationDateTime,
-        string $shipTo,
-        string $currencyIsoCode,
+        string $shipTo
     )
     {
         $this->supplierOrderNumber = $supplierOrderNumber;
         $this->supplierCreationDateTime = $supplierCreationDateTime;
         $this->shipTo = $shipTo;
-        $this->currencyIsoCode = $currencyIsoCode;
 
         parent::__construct(self::TYPE_ORDRSP, $supplierGLN, $buyerGLN);
     }
@@ -251,7 +249,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->totalVatAmount;
     }
 
-    public function getCurrencyIsoCode(): string
+    public function getCurrencyIsoCode(): ?string
     {
         return $this->currencyIsoCode;
     }
@@ -271,6 +269,7 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
             'contractNumber',
             'buyerComment',
             'supplierComment',
+            'currencyIsoCode',
         ];
 
         foreach ($stringProperties as $property) {
