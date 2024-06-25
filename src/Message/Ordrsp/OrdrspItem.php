@@ -47,7 +47,9 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     protected ?DateTimeImmutable $supplierEstimatedDeliveryDate = null;
 
-    protected ?string $dividedIntoSeveralDeliveries = null;
+    protected ?bool $supplierEstimatedDeliveryDateNotSpecified = null;
+
+    protected ?bool $dividedIntoSeveralDeliveries = null;
 
     protected ?string $supplierLineComment = null;
 
@@ -125,7 +127,13 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
-    public function setDividedIntoSeveralDeliveries(?string $dividedIntoSeveralDeliveries): OrdrspItem
+    public function setSupplierEstimatedDeliveryDateNotSpecified(?bool $supplierEstimatedDeliveryDateNotSpecified): OrdrspItem
+    {
+        $this->supplierEstimatedDeliveryDateNotSpecified = $supplierEstimatedDeliveryDateNotSpecified;
+        return $this;
+    }
+
+    public function setDividedIntoSeveralDeliveries(?bool $dividedIntoSeveralDeliveries): OrdrspItem
     {
         $this->dividedIntoSeveralDeliveries = $dividedIntoSeveralDeliveries;
         return $this;
@@ -217,7 +225,12 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this->supplierEstimatedDeliveryDate;
     }
 
-    public function getDividedIntoSeveralDeliveries(): ?string
+    public function getSupplierEstimatedDeliveryDateNotSpecified(): ?bool
+    {
+        return $this->supplierEstimatedDeliveryDateNotSpecified;
+    }
+
+    public function getDividedIntoSeveralDeliveries(): ?bool
     {
         return $this->dividedIntoSeveralDeliveries;
     }
@@ -240,7 +253,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             'brandName',
             'raecId',
             'supplierProductName',
-            'dividedIntoSeveralDeliveries',
             'supplierLineComment',
         ];
 
@@ -250,8 +262,14 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             }
         }
 
-        $floatProperties = ['vatAmount'];
+        $boolProperties = ['dividedIntoSeveralDeliveries', 'supplierEstimatedDeliveryDateNotSpecified'];
+        foreach ($boolProperties as $property) {
+            if (isset($data[$property])) {
+                $this->$property = (bool) $data[$property];
+            }
+        }
 
+        $floatProperties = ['vatAmount'];
         foreach ($floatProperties as $property) {
             if (isset($data[$property]) && is_numeric($data[$property])) {
                 $this->$property = (float) $data[$property];

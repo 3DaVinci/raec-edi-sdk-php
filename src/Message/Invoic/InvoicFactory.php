@@ -33,8 +33,7 @@ abstract class InvoicFactory implements MessageFactoryInterface
             $data['supplierKpp'],
             $data['buyerInn'],
             $data['buyerKpp'],
-            $data['currencyIsoCode'],
-            Utils::stringToDate($data['dateOfPayment']),
+            $data['currencyIsoCode']
         );
 
         if ($data['items']) {

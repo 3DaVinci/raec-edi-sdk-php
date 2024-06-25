@@ -62,7 +62,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $trackingNumber = null;
 
-    protected DateTimeImmutable $dateOfPayment;
+    protected ?DateTimeImmutable $dateOfPayment = null;
 
     protected ?bool $paidByFactoring = null;
 
@@ -82,8 +82,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         string $supplierKpp,
         string $buyerInn,
         string $buyerKpp,
-        string $currencyIsoCode,
-        DateTimeImmutable $dateOfPayment
+        string $currencyIsoCode
     )
     {
         $this->updNumber = $updNumber;
@@ -100,10 +99,16 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         $this->buyerInn = $buyerInn;
         $this->buyerKpp = $buyerKpp;
         $this->currencyIsoCode = $currencyIsoCode;
-        $this->dateOfPayment = $dateOfPayment;
 
         parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN);
     }
+
+    public function setDateOfPayment(?DateTimeImmutable $dateOfPayment): InvoicMessage
+    {
+        $this->dateOfPayment = $dateOfPayment;
+        return $this;
+    }
+
 
     public function setTtnNumber(?string $ttnNumber): InvoicMessage
     {
@@ -280,7 +285,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->trackingNumber;
     }
 
-    public function getDateOfPayment(): DateTimeImmutable
+    public function getDateOfPayment(): ?DateTimeImmutable
     {
         return $this->dateOfPayment;
     }
@@ -317,8 +322,11 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
             $this->paidByFactoring = (bool) $data['paidByFactoring'];
         }
 
-        if (isset($data['ttnDate']) && $data['ttnDate']) {
-            $this->ttnDate = Utils::stringToDateTime($data['ttnDate']);
+        $dateProperties = ['ttnDate', 'dateOfPayment'];
+        foreach ($dateProperties as $property) {
+            if (isset($data[$property]) && $data[$property]) {
+                $this->ttnDate = Utils::stringToDateTime($data[$property]);
+            }
         }
     }
 

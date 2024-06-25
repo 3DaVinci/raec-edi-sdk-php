@@ -1,7 +1,7 @@
 {
   "name": "3davinci/raec-edi-sdk-php",
   "minimum-stability": "stable",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "RAEC EDI service SDK for PHP - Use RAEC EDI Service in your PHP project",
   "keywords": ["raec","edi","sdk"],
   "type": "library",
