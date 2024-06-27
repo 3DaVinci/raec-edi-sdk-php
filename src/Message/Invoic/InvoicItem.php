@@ -49,7 +49,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
     protected int $vatRate;
 
-    protected ?float $vatAmount = null;
+    protected float $vatAmount;
 
     protected ?string $gtdNumber = null;
 
@@ -70,7 +70,8 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         float $netAmount,
         float $netAmountWithVat,
         int $vatRate,
-        string $originalCountryIsoCode
+        string $originalCountryIsoCode,
+        float $vatAmount
     )
     {
         $this->supplierOrderNumber = $supplierOrderNumber;
@@ -82,6 +83,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         $this->netAmountWithVat = $netAmountWithVat;
         $this->vatRate = $vatRate;
         $this->originalCountryIsoCode = $originalCountryIsoCode;
+        $this->vatAmount = $vatAmount;
     }
 
     public function setBuyerOrderNumber(?string $buyerOrderNumber): InvoicItem
@@ -135,12 +137,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
     public function setSupplierProductName(?string $supplierProductName): InvoicItem
     {
         $this->supplierProductName = $supplierProductName;
-        return $this;
-    }
-
-    public function setVatAmount(?float $vatAmount): InvoicItem
-    {
-        $this->vatAmount = $vatAmount;
         return $this;
     }
 
@@ -317,9 +313,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
         if (isset($data['brandCode']) && $data['brandCode']) {
             $this->brandCode = (int) $data['brandCode'];
-        }
-        if (isset($data['vatAmount']) && $data['vatAmount']) {
-            $this->vatAmount = (float) $data['vatAmount'];
         }
     }
 

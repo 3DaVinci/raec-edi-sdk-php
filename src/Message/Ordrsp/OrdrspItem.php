@@ -43,7 +43,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     protected int $vatRate;
 
-    protected ?float $vatAmount = null;
+    protected float $vatAmount;
 
     protected ?DateTimeImmutable $supplierEstimatedDeliveryDate = null;
 
@@ -61,7 +61,8 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         int $supplierConfirmedQuantity,
         float $netAmount,
         float $netAmountWithVat,
-        int $vatRate
+        int $vatRate,
+        float $vatAmount
     )
     {
         $this->internalSupplierCode = $internalSupplierCode;
@@ -71,6 +72,8 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         $this->netAmount = $netAmount;
         $this->netAmountWithVat = $netAmountWithVat;
         $this->vatRate = $vatRate;
+        $this->vatAmount = $vatAmount;
+
     }
 
     public function setBuyerLineNumber(?string $buyerLineNumber): OrdrspItem
@@ -112,12 +115,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
     public function setSupplierProductName(?string $supplierProductName): OrdrspItem
     {
         $this->supplierProductName = $supplierProductName;
-        return $this;
-    }
-
-    public function setVatAmount(?float $vatAmount): OrdrspItem
-    {
-        $this->vatAmount = $vatAmount;
         return $this;
     }
 
@@ -266,13 +263,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         foreach ($boolProperties as $property) {
             if (isset($data[$property])) {
                 $this->$property = (bool) $data[$property];
-            }
-        }
-
-        $floatProperties = ['vatAmount'];
-        foreach ($floatProperties as $property) {
-            if (isset($data[$property]) && is_numeric($data[$property])) {
-                $this->$property = (float) $data[$property];
             }
         }
 
