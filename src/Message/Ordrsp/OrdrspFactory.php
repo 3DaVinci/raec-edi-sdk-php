@@ -50,6 +50,7 @@ abstract class OrdrspFactory implements MessageFactoryInterface
             (float) $data['netAmount'],
             (float) $data['netAmountWithVat'],
             (int) $data['vatRate'],
+            (float) $data['vatAmount'],
         );
 
         $ordrspItem->populate($data);
