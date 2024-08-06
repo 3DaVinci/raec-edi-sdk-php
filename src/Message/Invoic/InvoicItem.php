@@ -45,7 +45,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
     protected float $netAmount;
 
-    protected float $netAmountWithVat;
+    protected ?float $netAmountWithVat;
 
     protected int $vatRate;
 
@@ -68,7 +68,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         string $supplierUnitOfMeasure,
         int $supplierConfirmedQuantity,
         float $netAmount,
-        float $netAmountWithVat,
         int $vatRate,
         string $originalCountryIsoCode,
         float $vatAmount
@@ -80,7 +79,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         $this->supplierUnitOfMeasure = $supplierUnitOfMeasure;
         $this->supplierConfirmedQuantity = $supplierConfirmedQuantity;
         $this->netAmount = $netAmount;
-        $this->netAmountWithVat = $netAmountWithVat;
         $this->vatRate = $vatRate;
         $this->originalCountryIsoCode = $originalCountryIsoCode;
         $this->vatAmount = $vatAmount;
@@ -164,6 +162,12 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
+    public function setNetAmountWithVat(?float $netAmountWithVat): InvoicItem
+    {
+        $this->netAmountWithVat = $netAmountWithVat;
+        return $this;
+    }
+
     public function getBuyerOrderNumber(): ?string
     {
         return $this->buyerOrderNumber;
@@ -239,7 +243,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
         return $this->netAmount;
     }
 
-    public function getNetAmountWithVat(): float
+    public function getNetAmountWithVat(): ?float
     {
         return $this->netAmountWithVat;
     }
@@ -313,6 +317,10 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
 
         if (isset($data['brandCode']) && $data['brandCode']) {
             $this->brandCode = (int) $data['brandCode'];
+        }
+
+        if (isset($data['netAmountWithVat']) && $data['netAmountWithVat']) {
+            $this->netAmountWithVat = (float) $data['netAmountWithVat'];
         }
     }
 

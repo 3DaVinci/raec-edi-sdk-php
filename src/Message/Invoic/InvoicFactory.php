@@ -60,9 +60,9 @@ abstract class InvoicFactory implements MessageFactoryInterface
             $data['supplierUnitOfMeasure'],
             (int) $data['supplierConfirmedQuantity'],
             (float) $data['netAmount'],
-            (float) $data['netAmountWithVat'],
             (int) $data['vatRate'],
             $data['originalCountryIsoCode'],
+            $data['vatAmount']
         );
 
         $invoicItem->populate($data);

@@ -48,7 +48,6 @@ abstract class OrdrspFactory implements MessageFactoryInterface
             $data['supplierMultiplicity'],
             (int) $data['supplierConfirmedQuantity'],
             (float) $data['netAmount'],
-            (float) $data['netAmountWithVat'],
             (int) $data['vatRate'],
             (float) $data['vatAmount'],
         );

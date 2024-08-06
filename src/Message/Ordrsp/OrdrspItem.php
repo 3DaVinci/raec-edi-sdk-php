@@ -39,11 +39,11 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
     protected float $netAmount;
 
-    protected float $netAmountWithVat;
-
     protected int $vatRate;
 
     protected float $vatAmount;
+
+    protected ?float $netAmountWithVat;
 
     protected ?DateTimeImmutable $supplierEstimatedDeliveryDate = null;
 
@@ -60,7 +60,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         string $supplierMultiplicity,
         int $supplierConfirmedQuantity,
         float $netAmount,
-        float $netAmountWithVat,
         int $vatRate,
         float $vatAmount
     )
@@ -70,7 +69,6 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         $this->supplierMultiplicity = $supplierMultiplicity;
         $this->supplierConfirmedQuantity = $supplierConfirmedQuantity;
         $this->netAmount = $netAmount;
-        $this->netAmountWithVat = $netAmountWithVat;
         $this->vatRate = $vatRate;
         $this->vatAmount = $vatAmount;
 
@@ -142,6 +140,12 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this;
     }
 
+    public function setNetAmountWithVat(?float $netAmountWithVat): OrdrspItem
+    {
+        $this->netAmountWithVat = $netAmountWithVat;
+        return $this;
+    }
+
     public function getBuyerLineNumber(): ?string
     {
         return $this->buyerLineNumber;
@@ -202,7 +206,7 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         return $this->netAmount;
     }
 
-    public function getNetAmountWithVat(): float
+    public function getNetAmountWithVat(): ?float
     {
         return $this->netAmountWithVat;
     }
@@ -268,6 +272,10 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
 
         if (isset($data['brandCode']) && $data['brandCode']) {
             $this->brandCode = (int) $data['brandCode'];
+        }
+
+        if (isset($data['netAmountWithVat']) && $data['netAmountWithVat']) {
+            $this->netAmountWithVat = (float) $data['netAmountWithVat'];
         }
 
         if (isset($data['supplierEstimatedDeliveryDate']) && $data['supplierEstimatedDeliveryDate']) {
