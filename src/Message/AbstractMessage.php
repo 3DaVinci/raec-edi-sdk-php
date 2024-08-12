@@ -18,6 +18,8 @@ abstract class AbstractMessage
      */
     protected array $items = [];
 
+    protected bool $isTest = false;
+
     /**
      * @param string $documentType
      * @param string $supplierGLN
@@ -56,5 +58,15 @@ abstract class AbstractMessage
     public function getBuyerGLN(): string
     {
         return $this->buyerGLN;
+    }
+
+    public function isTest(): bool
+    {
+        return $this->isTest;
+    }
+
+    public function setIsTest(bool $isTest): void
+    {
+        $this->isTest = $isTest;
     }
 }

@@ -20,6 +20,7 @@ class GetDocumentResponse extends AbstractResponse implements ResponseInterface
             new DateTime($this->data['createdAt']),
             (isset($this->data['receivedAt']) && $this->data['receivedAt']) ? new DateTime($this->data['receivedAt']) : null,
             MessageFactory::create($this->data['type'], $this->data['document']),
+            $this->data['isTest'] ?? false
         );
     }
 }

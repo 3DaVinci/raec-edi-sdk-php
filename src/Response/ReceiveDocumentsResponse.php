@@ -30,6 +30,7 @@ class ReceiveDocumentsResponse extends AbstractResponse implements ResponseInter
                 new DateTime($item['createdAt']),
                 (isset($item['receivedAt']) && $item['receivedAt']) ? new DateTime($item['receivedAt']) : null,
                 MessageFactory::create($item['type'], $item['document']),
+                $item['isTest'] ?? false
             );
 
             yield $document;

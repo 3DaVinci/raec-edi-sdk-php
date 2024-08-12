@@ -21,13 +21,17 @@ class Document
 
     public MessageInterface $message;
 
+    public bool $isTest;
+
     public function __construct(
         string $id,
         string $type,
         string $state,
         DateTime $createdAt,
         ?DateTime $receivedAt,
-        MessageInterface $message)
+        MessageInterface $message,
+        bool $isTest = false
+    )
     {
         $this->id = $id;
         $this->type = $type;
@@ -35,6 +39,7 @@ class Document
         $this->createdAt = $createdAt;
         $this->receivedAt = $receivedAt;
         $this->message = $message;
+        $this->isTest = $isTest;
     }
 
     public function getId(): string
@@ -65,5 +70,10 @@ class Document
     public function getMessage(): MessageInterface
     {
         return $this->message;
+    }
+
+    public function isTest(): bool
+    {
+        return $this->isTest;
     }
 }
