@@ -59,14 +59,15 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         string $buyerGLN,
         string $supplierOrderNumber,
         DateTimeImmutable $supplierCreationDateTime,
-        string $shipTo
+        string $shipTo,
+        bool $isTest = self::DEFAULT_IS_TEST_VALUE
     )
     {
         $this->supplierOrderNumber = $supplierOrderNumber;
         $this->supplierCreationDateTime = $supplierCreationDateTime;
         $this->shipTo = $shipTo;
 
-        parent::__construct(self::TYPE_ORDRSP, $supplierGLN, $buyerGLN);
+        parent::__construct(self::TYPE_ORDRSP, $supplierGLN, $buyerGLN, $isTest);
     }
 
     public function setBuyerOrderNumber(?string $buyerOrderNumber): OrdrspMessage

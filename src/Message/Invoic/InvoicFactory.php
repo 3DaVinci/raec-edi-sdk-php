@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace RaecEdiSDK\Message\Invoic;
 
+use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageFactoryInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
 use RaecEdiSDK\Utils;
@@ -33,7 +34,8 @@ abstract class InvoicFactory implements MessageFactoryInterface
             $data['supplierKpp'],
             $data['buyerInn'],
             $data['buyerKpp'],
-            $data['currencyIsoCode']
+            $data['currencyIsoCode'],
+            $data['isTest'] ?? AbstractMessage::DEFAULT_IS_TEST_VALUE
         );
 
         if ($data['items']) {

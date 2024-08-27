@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace RaecEdiSDK\Message\Ordrsp;
 
+use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageFactoryInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
 use RaecEdiSDK\Utils;
@@ -22,7 +23,8 @@ abstract class OrdrspFactory implements MessageFactoryInterface
             $data['buyerGLN'],
             $data['supplierOrderNumber'],
             Utils::stringToDateTime($data['supplierCreationDateTime']),
-            $data['shipTo']
+            $data['shipTo'],
+            $data['isTest'] ?? AbstractMessage::DEFAULT_IS_TEST_VALUE
         );
 
         if ($data['items']) {

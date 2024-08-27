@@ -45,14 +45,15 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
         string $buyerGLN,
         string $buyerOrderNumber,
         DateTimeImmutable $buyerOrderCreationDateTime,
-        string $shipTo
+        string $shipTo,
+        bool $isTest = self::DEFAULT_IS_TEST_VALUE
     )
     {
         $this->buyerOrderNumber = $buyerOrderNumber;
         $this->buyerOrderCreationDateTime = $buyerOrderCreationDateTime;
         $this->shipTo = $shipTo;
 
-        parent::__construct(self::TYPE_ORDERS, $supplierGLN, $buyerGLN);
+        parent::__construct(self::TYPE_ORDERS, $supplierGLN, $buyerGLN, $isTest);
     }
 
     public function setShipFrom(?string $shipFrom): OrdersMessage

@@ -7,6 +7,8 @@ namespace RaecEdiSDK\Message;
 
 abstract class AbstractMessage
 {
+    public const DEFAULT_IS_TEST_VALUE = false;
+
     protected string $documentType;
 
     protected string $supplierGLN;
@@ -18,18 +20,25 @@ abstract class AbstractMessage
      */
     protected array $items = [];
 
-    protected bool $isTest = false;
+    protected bool $isTest;
 
     /**
      * @param string $documentType
      * @param string $supplierGLN
      * @param string $buyerGLN
+     * @param bool $isTest
      */
-    public function __construct(string $documentType, string $supplierGLN, string $buyerGLN)
+    public function __construct(
+        string $documentType,
+        string $supplierGLN,
+        string $buyerGLN,
+        bool $isTest = AbstractMessage::DEFAULT_IS_TEST_VALUE
+    )
     {
         $this->documentType = $documentType;
         $this->supplierGLN = $supplierGLN;
         $this->buyerGLN = $buyerGLN;
+        $this->isTest = $isTest;
     }
 
     public function addItem(MessageItemInterface $item): void

@@ -82,7 +82,8 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         string $supplierKpp,
         string $buyerInn,
         string $buyerKpp,
-        string $currencyIsoCode
+        string $currencyIsoCode,
+        bool $isTest = self::DEFAULT_IS_TEST_VALUE
     )
     {
         $this->updNumber = $updNumber;
@@ -100,7 +101,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         $this->buyerKpp = $buyerKpp;
         $this->currencyIsoCode = $currencyIsoCode;
 
-        parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN);
+        parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN, $isTest);
     }
 
     public function setDateOfPayment(?DateTimeImmutable $dateOfPayment): InvoicMessage
