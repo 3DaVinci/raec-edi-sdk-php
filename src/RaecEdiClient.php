@@ -11,10 +11,12 @@ use RaecEdiSDK\Exception\ValidateRequestException;
 use RaecEdiSDK\Message\MessageInterface;
 use RaecEdiSDK\Request\GetDocumentRequest;
 use RaecEdiSDK\Request\ReceiveDocumentsRequest;
+use RaecEdiSDK\Request\ReceiveWarehousesRequest;
 use RaecEdiSDK\Request\RequestInterface;
 use RaecEdiSDK\Request\SendDocumentRequest;
 use RaecEdiSDK\Response\GetDocumentResponse;
 use RaecEdiSDK\Response\ReceiveDocumentsResponse;
+use RaecEdiSDK\Response\ReceiveWarehousesResponse;
 use RaecEdiSDK\Response\ResponseInterface;
 use RaecEdiSDK\Response\SendDocumentResponse;
 
@@ -23,7 +25,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RaecEdiClient
 {
-    public const DEFAULT_BASE_URI = 'http://10.4.0.217/api/v1/';
+    public const DEFAULT_BASE_URI = 'https://test.raec.pro/api/v1/';
 
     private const DEFAULT_TIMEOUT_SEC = 10;
 
@@ -78,6 +80,21 @@ class RaecEdiClient
             SendDocumentRequest::class,
             SendDocumentResponse::class,
             ['message' => $message]
+        );
+
+        return $request->send();
+    }
+
+    public function getWarehouses(
+        int $page = 1,
+        int $perPage = 100,
+        ?string $dateFrom = null
+    ): ResponseInterface
+    {
+        $request = $this->createRequest(
+            ReceiveWarehousesRequest::class,
+            ReceiveWarehousesResponse::class,
+            ['page' => $page, 'perPage' => $perPage, 'dateFrom' => $dateFrom]
         );
 
         return $request->send();

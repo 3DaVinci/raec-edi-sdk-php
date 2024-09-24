@@ -8,9 +8,11 @@ use RuntimeException;
 
 class ValidateRequestException extends RuntimeException
 {
-    public function __construct(string $fieldName)
+    public function __construct(string $fieldName, ?string $message = null)
     {
-        $message = sprintf('В запросе отсутствует обязательное поле %s', $fieldName);
+        if (!$message) {
+            $message = sprintf('В запросе отсутствует обязательное поле %s', $fieldName);
+        }
 
         parent::__construct($message);
     }
