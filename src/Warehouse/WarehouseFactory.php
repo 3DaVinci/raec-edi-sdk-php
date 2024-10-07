@@ -11,6 +11,7 @@ abstract class WarehouseFactory
     {
         $warehouse = new Warehouse(
             $data['erpId'],
+            $data['gln'],
             $data['type']
         );
         $warehouse->populate($data);

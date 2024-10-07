@@ -9,6 +9,8 @@ class Warehouse
 {
     private string $erpId;
 
+    private string $gln;
+
     private ?string $name = null;
 
     private string $type;
@@ -29,11 +31,13 @@ class Warehouse
 
     /**
      * @param string $erpId
+     * @param string $gln
      * @param string $type
      */
-    public function __construct(string $erpId, string $type)
+    public function __construct(string $erpId, string $gln, string $type)
     {
         $this->erpId = $erpId;
+        $this->gln = $gln;
         $this->type = $type;
     }
 
@@ -45,6 +49,11 @@ class Warehouse
     public function getErpId(): string
     {
         return $this->erpId;
+    }
+
+    public function getGln(): string
+    {
+        return $this->gln;
     }
 
     public function getName(): ?string
