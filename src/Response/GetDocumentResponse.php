@@ -8,6 +8,7 @@ namespace RaecEdiSDK\Response;
 use DateTime;
 use RaecEdiSDK\Message\Document;
 use RaecEdiSDK\Message\MessageFactory;
+use RaecEdiSDK\Message\MessageInterface;
 
 class GetDocumentResponse extends AbstractResponse implements ResponseInterface
 {
@@ -17,7 +18,7 @@ class GetDocumentResponse extends AbstractResponse implements ResponseInterface
             $this->data['id'],
             $this->data['type'],
             $this->data['state'],
-            new DateTime($this->data['createdAt']),
+            DateTime::createFromFormat(MessageInterface::DATE_TIME_FORMAT, $this->data['createdAt']),
             (isset($this->data['receivedAt']) && $this->data['receivedAt']) ? new DateTime($this->data['receivedAt']) : null,
             MessageFactory::create($this->data['type'], $this->data['document']),
             $this->data['isTest'] ?? false
