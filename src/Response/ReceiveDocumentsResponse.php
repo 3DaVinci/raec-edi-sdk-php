@@ -27,8 +27,10 @@ class ReceiveDocumentsResponse extends AbstractResponse implements ResponseInter
                 $item['id'],
                 $item['type'],
                 $item['state'],
-                new DateTime($item['createdAt']),
-                (isset($item['receivedAt']) && $item['receivedAt']) ? new DateTime($item['receivedAt']) : null,
+                DateTime::createFromFormat(MessageInterface::DATE_TIME_FORMAT, $item['createdAt']),
+                (isset($item['receivedAt']) && $item['receivedAt'])
+                    ? DateTime::createFromFormat(MessageInterface::DATE_TIME_FORMAT, $item['receivedAt'])
+                    : null,
                 MessageFactory::create($item['type'], $item['document']),
                 $item['isTest'] ?? false
             );
