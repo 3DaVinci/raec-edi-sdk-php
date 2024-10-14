@@ -30,7 +30,13 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $orderType = null;
 
-    protected ?string $projectNumber = null;
+    protected ?string $buyerProjectNumber = null;
+
+    protected ?string $buyerContactManager = null;
+
+    protected ?string $buyerContactManagerEmail = null;
+
+    protected ?string $buyerContactManagerPhone = null;
 
     protected ?string $contractNumber = null;
 
@@ -80,9 +86,27 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
-    public function setProjectNumber(?string $projectNumber): OrdersMessage
+    public function setBuyerProjectNumber(?string $buyerProjectNumber): OrdersMessage
     {
-        $this->projectNumber = $projectNumber;
+        $this->buyerProjectNumber = $buyerProjectNumber;
+        return $this;
+    }
+
+    public function setBuyerContactManager(?string $buyerContactManager): OrdersMessage
+    {
+        $this->buyerContactManager = $buyerContactManager;
+        return $this;
+    }
+
+    public function setBuyerContactManagerEmail(?string $buyerContactManagerEmail): OrdersMessage
+    {
+        $this->buyerContactManagerEmail = $buyerContactManagerEmail;
+        return $this;
+    }
+
+    public function setBuyerContactManagerPhone(?string $buyerContactManagerPhone): OrdersMessage
+    {
+        $this->buyerContactManagerPhone = $buyerContactManagerPhone;
         return $this;
     }
 
@@ -145,9 +169,24 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->orderType;
     }
 
-    public function getProjectNumber(): ?string
+    public function getBuyerProjectNumber(): ?string
     {
-        return $this->projectNumber;
+        return $this->buyerProjectNumber;
+    }
+
+    public function getBuyerContactManager(): ?string
+    {
+        return $this->buyerContactManager;
+    }
+
+    public function getBuyerContactManagerEmail(): ?string
+    {
+        return $this->buyerContactManagerEmail;
+    }
+
+    public function getBuyerContactManagerPhone(): ?string
+    {
+        return $this->buyerContactManagerPhone;
     }
 
     public function getContractNumber(): ?string
@@ -180,7 +219,10 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
             'shipFrom',
             'pickupPointAddress',
             'orderType',
-            'projectNumber',
+            'buyerProjectNumber',
+            'buyerContactManager',
+            'buyerContactManagerEmail',
+            'buyerContactManagerPhone',
             'contractNumber',
             'buyerComment',
         ];

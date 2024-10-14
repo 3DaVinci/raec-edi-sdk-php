@@ -34,7 +34,15 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $orderType = null;
 
-    protected ?string $projectNumber = null;
+    protected ?string $buyerProjectNumber = null;
+
+    protected ?string $supplierProjectNumber = null;
+
+    protected ?string $supplierContactManager = null;
+
+    protected ?string $supplierContactManagerEmail = null;
+
+    protected ?string $supplierContactManagerPhone = null;
 
     protected ?string $contractNumber = null;
 
@@ -106,9 +114,33 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this;
     }
 
-    public function setProjectNumber(?string $projectNumber): OrdrspMessage
+    public function setBuyerProjectNumber(?string $buyerProjectNumber): OrdrspMessage
     {
-        $this->projectNumber = $projectNumber;
+        $this->buyerProjectNumber = $buyerProjectNumber;
+        return $this;
+    }
+
+    public function setSupplierProjectNumber(?string $supplierProjectNumber): OrdrspMessage
+    {
+        $this->supplierProjectNumber = $supplierProjectNumber;
+        return $this;
+    }
+
+    public function setSupplierContactManager(?string $supplierContactManager): OrdrspMessage
+    {
+        $this->supplierContactManager = $supplierContactManager;
+        return $this;
+    }
+
+    public function setSupplierContactManagerEmail(?string $supplierContactManagerEmail): OrdrspMessage
+    {
+        $this->supplierContactManagerEmail = $supplierContactManagerEmail;
+        return $this;
+    }
+
+    public function setSupplierContactManagerPhone(?string $supplierContactManagerPhone): OrdrspMessage
+    {
+        $this->supplierContactManagerPhone = $supplierContactManagerPhone;
         return $this;
     }
 
@@ -205,9 +237,29 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->orderType;
     }
 
-    public function getProjectNumber(): ?string
+    public function getBuyerProjectNumber(): ?string
     {
-        return $this->projectNumber;
+        return $this->buyerProjectNumber;
+    }
+
+    public function getSupplierProjectNumber(): ?string
+    {
+        return $this->supplierProjectNumber;
+    }
+
+    public function getSupplierContactManager(): ?string
+    {
+        return $this->supplierContactManager;
+    }
+
+    public function getSupplierContactManagerEmail(): ?string
+    {
+        return $this->supplierContactManagerEmail;
+    }
+
+    public function getSupplierContactManagerPhone(): ?string
+    {
+        return $this->supplierContactManagerPhone;
     }
 
     public function getContractNumber(): ?string
@@ -266,7 +318,11 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
             'shipFrom',
             'pickupPointAddress',
             'orderType',
-            'projectNumber',
+            'buyerProjectNumber',
+            'supplierProjectNumber',
+            'supplierContactManager',
+            'supplierContactManagerEmail',
+            'supplierContactManagerPhone',
             'contractNumber',
             'buyerComment',
             'supplierComment',

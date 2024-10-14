@@ -66,6 +66,14 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?bool $paidByFactoring = null;
 
+    protected ?string $supplierProjectNumber = null;
+
+    protected ?string $supplierContactManager = null;
+
+    protected ?string $supplierContactManagerEmail = null;
+
+    protected ?string $supplierContactManagerPhone = null;
+
     public function __construct(
         string $supplierGLN,
         string $buyerGLN,
@@ -168,6 +176,30 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
     public function setPaidByFactoring(?bool $paidByFactoring): InvoicMessage
     {
         $this->paidByFactoring = $paidByFactoring;
+        return $this;
+    }
+
+    public function setSupplierProjectNumber(?string $supplierProjectNumber): InvoicMessage
+    {
+        $this->supplierProjectNumber = $supplierProjectNumber;
+        return $this;
+    }
+
+    public function setSupplierContactManager(?string $supplierContactManager): InvoicMessage
+    {
+        $this->supplierContactManager = $supplierContactManager;
+        return $this;
+    }
+
+    public function setSupplierContactManagerEmail(?string $supplierContactManagerEmail): InvoicMessage
+    {
+        $this->supplierContactManagerEmail = $supplierContactManagerEmail;
+        return $this;
+    }
+
+    public function setSupplierContactManagerPhone(?string $supplierContactManagerPhone): InvoicMessage
+    {
+        $this->supplierContactManagerPhone = $supplierContactManagerPhone;
         return $this;
     }
 
@@ -296,6 +328,26 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         return $this->paidByFactoring;
     }
 
+    public function getSupplierProjectNumber(): ?string
+    {
+        return $this->supplierProjectNumber;
+    }
+
+    public function getSupplierContactManager(): ?string
+    {
+        return $this->supplierContactManager;
+    }
+
+    public function getSupplierContactManagerEmail(): ?string
+    {
+        return $this->supplierContactManagerEmail;
+    }
+
+    public function getSupplierContactManagerPhone(): ?string
+    {
+        return $this->supplierContactManagerPhone;
+    }
+
     /**
      * @param array<string, mixed> $data
      * @return void
@@ -311,6 +363,10 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
             'consigneeKpp',
             'transportCompanyInn',
             'trackingNumber',
+            'supplierProjectNumber',
+            'supplierContactManager',
+            'supplierContactManagerEmail',
+            'supplierContactManagerPhone',
         ];
 
         foreach ($stringProperties as $property) {
