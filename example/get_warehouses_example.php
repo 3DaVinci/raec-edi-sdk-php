@@ -14,7 +14,8 @@ use RaecEdiSDK\Warehouse\Warehouse;
 require_once __DIR__.'/../vendor/autoload.php';
 
 $raecEdiClient = new RaecEdiClient(
-    new Credentials(email: 'supplier@3davinci.ru', password: '040222')
+    new Credentials(email: 'buyer@3davinci.ru', password: '040555'),
+    options: []
 );
 
 try {
@@ -36,5 +37,5 @@ if ($response->isSuccess()) {
 
     /** @var PaginationResponse $pagination */
     $pagination = $response->getPagination();
-    var_dump($pagination);
+    //var_dump($pagination);
 }

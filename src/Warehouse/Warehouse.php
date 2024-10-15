@@ -27,18 +27,22 @@ class Warehouse
 
     private ?WarehouseAddress $address = null;
 
-    private ?string $coordinates;
+    private ?string $coordinates = null;
+
+    private string $companyName;
 
     /**
      * @param string $erpId
      * @param string $gln
      * @param string $type
+     * @param string $companyName
      */
-    public function __construct(string $erpId, string $gln, string $type)
+    public function __construct(string $erpId, string $gln, string $type, string $companyName)
     {
         $this->erpId = $erpId;
         $this->gln = $gln;
         $this->type = $type;
+        $this->companyName = $companyName;
     }
 
     public function setAddress(WarehouseAddress $address): void
@@ -99,6 +103,11 @@ class Warehouse
     public function getCoordinates(): ?string
     {
         return $this->coordinates;
+    }
+
+    public function getCompanyName(): string
+    {
+        return $this->companyName;
     }
 
     public function populate(array $data): void

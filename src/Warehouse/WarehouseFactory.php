@@ -12,7 +12,8 @@ abstract class WarehouseFactory
         $warehouse = new Warehouse(
             $data['erpId'],
             $data['gln'],
-            $data['type']
+            $data['type'],
+            (string) $data['companyName']
         );
         $warehouse->populate($data);
 
