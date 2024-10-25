@@ -74,6 +74,6 @@ class Document
 
     public function isTest(): bool
     {
-        return $this->isTest;
+        return $this->getMessage()->isTest();
     }
 }

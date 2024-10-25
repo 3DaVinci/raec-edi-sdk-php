@@ -15,4 +15,6 @@ interface MessageInterface
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array;
+
+    public function isTest(): bool;
 }
