@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace RaecEdiSDK\Message\Invoic;
 
+use RaecEdiSDK\Exception\InvalidValueException;
 use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageFactoryInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
@@ -15,6 +16,7 @@ abstract class InvoicFactory implements MessageFactoryInterface
     /**
      * @param array<string, mixed> $data
      * @return InvoicMessage
+     * @throws InvalidValueException
      */
     public static function create(array $data): InvoicMessage
     {
@@ -22,14 +24,14 @@ abstract class InvoicFactory implements MessageFactoryInterface
             $data['supplierGLN'],
             $data['buyerGLN'],
             $data['updNumber'],
-            Utils::stringToDate($data['updDate']),
+            Utils::stringToDate((string) $data['updDate'], 'updDate'),
             $data['sfNumber'],
-            Utils::stringToDate($data['sfDate']),
+            Utils::stringToDate((string) $data['sfDate'], 'sfDate'),
             $data['invoiceNumber'],
-            Utils::stringToDate($data['invoiceDate']),
+            Utils::stringToDate((string) $data['invoiceDate'], 'invoiceDate'),
             $data['shipTo'],
             $data['shipFrom'],
-            Utils::stringToDate($data['supplierEstimatedDeliveryDate']),
+            Utils::stringToDate((string) $data['supplierEstimatedDeliveryDate'], 'supplierEstimatedDeliveryDate'),
             $data['supplierInn'],
             $data['supplierKpp'],
             $data['buyerInn'],
@@ -52,12 +54,13 @@ abstract class InvoicFactory implements MessageFactoryInterface
     /**
      * @param array<string, mixed> $data
      * @return MessageItemInterface
+     * @throws InvalidValueException
      */
     public static function createItem(array $data): MessageItemInterface
     {
         $invoicItem = new InvoicItem(
             $data['supplierOrderNumber'],
-            Utils::stringToDateTime($data['supplierCreationDateTime']),
+            Utils::stringToDateTime((string) $data['supplierCreationDateTime'], 'item.supplierCreationDateTime'),
             $data['internalSupplierCode'],
             $data['supplierUnitOfMeasure'],
             (int) $data['supplierConfirmedQuantity'],

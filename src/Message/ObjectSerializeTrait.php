@@ -11,7 +11,7 @@ trait ObjectSerializeTrait
     {
         return array_filter(
             get_object_vars($this),
-            fn($value, $key) => !is_null($value) && !is_object($value),
+            fn($value, $key) => !is_null($value) && !is_object($value) && $key !== 'items',
             ARRAY_FILTER_USE_BOTH
         );
     }

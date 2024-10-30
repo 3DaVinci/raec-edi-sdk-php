@@ -7,6 +7,10 @@ namespace RaecEdiSDK\Message\Ordrsp;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use RaecEdiSDK\Exception\InvalidBooleanValueException;
+use RaecEdiSDK\Exception\InvalidNumberValueException;
+use RaecEdiSDK\Exception\InvalidStringValueException;
+use RaecEdiSDK\Message\MessageInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
@@ -258,28 +262,40 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
         ];
 
         foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && is_scalar($data[$property])) {
+            if (isset($data[$property]) && $data[$property]) {
+                if (!is_scalar($data[$property])) {
+                    throw new InvalidStringValueException('item.'.$property, gettype($data[$property]));
+                }
                 $this->$property = (string) $data[$property];
             }
         }
 
         $boolProperties = ['dividedIntoSeveralDeliveries', 'supplierEstimatedDeliveryDateNotSpecified'];
         foreach ($boolProperties as $property) {
-            if (isset($data[$property])) {
+            if (isset($data[$property]) && $data[$property] !== '') {
+                if (!in_array($data[$property], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
+                    throw new InvalidBooleanValueException('item.'.$property, (string) $data[$property]);
+                }
                 $this->$property = (bool) $data[$property];
             }
         }
 
         if (isset($data['brandCode']) && $data['brandCode']) {
+            if (!is_numeric($data['brandCode'])) {
+                throw new InvalidNumberValueException('item.brandCode', gettype($data['brandCode']).': '.$data['brandCode']);
+            }
             $this->brandCode = (int) $data['brandCode'];
         }
 
         if (isset($data['netAmountWithVat']) && $data['netAmountWithVat']) {
+            if (!is_numeric($data['netAmountWithVat'])) {
+                throw new InvalidNumberValueException('item.netAmountWithVat', gettype($data['netAmountWithVat']).': '.$data['netAmountWithVat']);
+            }
             $this->netAmountWithVat = (float) $data['netAmountWithVat'];
         }
 
         if (isset($data['supplierEstimatedDeliveryDate']) && $data['supplierEstimatedDeliveryDate']) {
-            $this->supplierEstimatedDeliveryDate = Utils::stringToDate($data['supplierEstimatedDeliveryDate']);
+            $this->supplierEstimatedDeliveryDate = Utils::stringToDate((string) $data['supplierEstimatedDeliveryDate'], 'supplierEstimatedDeliveryDate');
         }
     }
 

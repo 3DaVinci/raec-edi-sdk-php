@@ -7,6 +7,8 @@ namespace RaecEdiSDK\Message\Orders;
 
 use DateTimeImmutable;
 use JsonSerializable;
+use RaecEdiSDK\Exception\InvalidNumberValueException;
+use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\MessageItemInterface;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
@@ -171,7 +173,10 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
         ];
 
         foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && is_scalar($data[$property])) {
+            if (isset($data[$property]) && $data[$property]) {
+                if (!is_scalar($data[$property])) {
+                    throw new InvalidStringValueException('item.'.$property, gettype($data[$property]));
+                }
                 $this->$property = (string) $data[$property];
             }
         }
@@ -181,8 +186,18 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
             'brandCode'
         ];
         foreach ($intProperties as $property) {
-            if (isset($data[$property]) && is_numeric($data[$property])) {
+            if (isset($data[$property]) && $data[$property]) {
+                if (!is_numeric($data[$property])) {
+                    throw new InvalidNumberValueException('item.'.$property, gettype($data[$property]).': '.$data[$property]);
+                }
                 $this->$property = (int) $data[$property];
+            }
+        }
+
+        $dateProperties = ['buyerRequestedDeliveryDate'];
+        foreach ($dateProperties as $property) {
+            if (isset($data[$property]) && $data[$property]) {
+                $this->buyerRequestedDeliveryDate = Utils::stringToDate((string) $data[$property], 'item.'.$property);
             }
         }
     }

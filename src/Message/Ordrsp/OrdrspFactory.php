@@ -22,7 +22,7 @@ abstract class OrdrspFactory implements MessageFactoryInterface
             $data['supplierGLN'],
             $data['buyerGLN'],
             $data['supplierOrderNumber'],
-            Utils::stringToDateTime($data['supplierCreationDateTime']),
+            Utils::stringToDateTime((string) $data['supplierCreationDateTime'], 'supplierCreationDateTime'),
             $data['shipTo'],
             $data['isTest'] ?? AbstractMessage::DEFAULT_IS_TEST_VALUE
         );

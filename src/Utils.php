@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace RaecEdiSDK;
 
 use DateTimeImmutable;
+use RaecEdiSDK\Exception\InvalidDateTimeValueException;
+use RaecEdiSDK\Exception\InvalidDateValueException;
 use RaecEdiSDK\Message\MessageInterface;
 use RuntimeException;
 
@@ -13,14 +15,46 @@ class Utils
 {
     const DEFAULT_JSON_FLAGS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PARTIAL_OUTPUT_ON_ERROR;
 
-    public static function stringToDateTime(string $value): DateTimeImmutable
+    /**
+     * @param string $value
+     * @param string $fieldName
+     * @return DateTimeImmutable
+     * @throws InvalidDateTimeValueException
+     */
+    public static function stringToDateTime(string $value, string $fieldName): DateTimeImmutable
     {
-        return DateTimeImmutable::createFromFormat(MessageInterface::DATE_TIME_FORMAT, $value);
+        $dateTimeValue = DateTimeImmutable::createFromFormat(MessageInterface::DATE_TIME_FORMAT, $value);
+
+        if (!$dateTimeValue) {
+            $dateTimeValue = DateTimeImmutable::createFromFormat(MessageInterface::DATE_TIME_FORMAT_EXTRA, $value);
+        }
+
+        if (!$dateTimeValue) {
+            throw new InvalidDateTimeValueException($fieldName, $value);
+        }
+
+        return $dateTimeValue;
     }
 
-    public static function stringToDate(string $value): DateTimeImmutable
+    /**
+     * @param string $value
+     * @param string $fieldName
+     * @return DateTimeImmutable
+     * @throws InvalidDateValueException
+     */
+    public static function stringToDate(string $value, string $fieldName): DateTimeImmutable
     {
-        return DateTimeImmutable::createFromFormat(MessageInterface::DATE_FORMAT, $value);
+        $dateValue = DateTimeImmutable::createFromFormat(MessageInterface::DATE_FORMAT, $value);
+
+        if (!$dateValue) {
+            $dateValue = DateTimeImmutable::createFromFormat(MessageInterface::DATE_FORMAT_EXTRA, $value);
+        }
+
+        if (!$dateValue) {
+            throw new InvalidDateValueException($fieldName, $value);
+        }
+
+        return $dateValue;
     }
 
     public static function dateTimeToString(DateTimeImmutable $dateTime): string

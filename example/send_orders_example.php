@@ -17,7 +17,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 $ordersMessage = new OrdersMessage(
     supplierGLN: '6971267350013',
-    buyerGLN: '6974796060019',
+    buyerGLN: '1234023894117',
     buyerOrderNumber: '2024-ЭК00-001052',
     buyerOrderCreationDateTime: new DateTimeImmutable(),
     shipTo: 'Склад №3'
@@ -37,6 +37,27 @@ $ordersMessage->addItem($ordersItem);
 $raecEdiClient = new RaecEdiClient(
     new Credentials(email: 'buyer@3davinci.ru', password: '040555')
 );
+
+// Или создание из массива с помощью фабрики
+//$data = [
+//    'supplierGLN' => '6971267350013',
+//    'buyerGLN' => '1234023894117',
+//    'buyerOrderNumber' => '2024-ЭК00-001052',
+//    'buyerOrderCreationDateTime' => '2024.12.10 12:12:12',
+//    'shipTo' => 'Склад №3',
+//    'items' => [
+//        [
+//            'internalSupplierCode' => 'CKK10',
+//            'buyerRequestedQuantity' => 20,
+//            'buyerRequestedDeliveryDate' => '2024-10-15'
+//        ]
+//    ]
+//];
+//try {
+//    $ordersMessage = \RaecEdiSDK\Message\Orders\OrdersFactory::create($data);
+//} catch (\RaecEdiSDK\Exception\InvalidValueException $e) {
+//
+//}
 
 try {
     /** @var SendDocumentResponse $responseDocument */

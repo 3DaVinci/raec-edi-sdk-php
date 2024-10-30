@@ -22,7 +22,7 @@ abstract class OrdersFactory implements MessageFactoryInterface
             $data['supplierGLN'],
             $data['buyerGLN'],
             $data['buyerOrderNumber'],
-            Utils::stringToDateTime($data['buyerOrderCreationDateTime']),
+            Utils::stringToDateTime((string) $data['buyerOrderCreationDateTime'], 'buyerOrderCreationDateTime'),
             $data['shipTo'],
             $data['isTest'] ?? AbstractMessage::DEFAULT_IS_TEST_VALUE
         );

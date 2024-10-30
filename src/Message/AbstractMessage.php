@@ -5,6 +5,8 @@ declare(strict_types=1);
 
 namespace RaecEdiSDK\Message;
 
+use JsonSerializable;
+
 abstract class AbstractMessage
 {
     public const DEFAULT_IS_TEST_VALUE = false;
@@ -77,5 +79,19 @@ abstract class AbstractMessage
     public function setIsTest(bool $isTest): void
     {
         $this->isTest = $isTest;
+    }
+
+    /**
+     * @return MessageItemInterface[]
+     */
+    protected function getSerializedItems(): array
+    {
+        $items = [];
+        /** @var JsonSerializable $item */
+        foreach ($this->items as $item) {
+            array_push($items, $item->jsonSerialize());
+        }
+
+        return $items;
     }
 }

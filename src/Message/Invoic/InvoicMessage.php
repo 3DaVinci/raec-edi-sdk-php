@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace RaecEdiSDK\Message\Invoic;
 
 use DateTimeImmutable;
+use RaecEdiSDK\Exception\InvalidBooleanValueException;
+use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageInterface;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
@@ -370,19 +372,25 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         ];
 
         foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && is_scalar($data[$property])) {
+            if (isset($data[$property]) && $data[$property]) {
+                if (!is_scalar($data[$property])) {
+                    throw new InvalidStringValueException($property, gettype($data[$property]));
+                }
                 $this->$property = (string) $data[$property];
             }
         }
 
-        if (isset($data['paidByFactoring'])) {
+        if (isset($data['paidByFactoring']) && $data['paidByFactoring'] !== '') {
+            if (!in_array($data['paidByFactoring'], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
+                throw new InvalidBooleanValueException('paidByFactoring', (string) $data['paidByFactoring']);
+            }
             $this->paidByFactoring = (bool) $data['paidByFactoring'];
         }
 
         $dateProperties = ['ttnDate', 'dateOfPayment'];
         foreach ($dateProperties as $property) {
             if (isset($data[$property]) && $data[$property]) {
-                $this->ttnDate = Utils::stringToDateTime($data[$property]);
+                $this->ttnDate = Utils::stringToDateTime((string) $data[$property], $property);
             }
         }
     }
@@ -405,6 +413,8 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
                 $data[$propertyName] = Utils::dateToString($this->$propertyName);
             }
         }
+
+        $data['items'] = $this->getSerializedItems();
 
         return $data;
     }
