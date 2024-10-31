@@ -8,14 +8,15 @@ namespace RaecEdiSDK\Message\Orders;
 use DateTimeImmutable;
 use JsonSerializable;
 use RaecEdiSDK\Exception\InvalidNumberValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\MessageItemInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
 
 class OrdersItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected string $internalSupplierCode;
 
@@ -171,15 +172,7 @@ class OrdersItem implements MessageItemInterface, JsonSerializable
             'brandName',
             'raecId',
         ];
-
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException('item.'.$property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
+        $this->setStringProperties($stringProperties, $data, isItem: true);
 
         $intProperties = [
             'buyerMultiplicity',

@@ -8,14 +8,15 @@ namespace RaecEdiSDK\Message\Invoic;
 use DateTimeImmutable;
 use JsonSerializable;
 use RaecEdiSDK\Exception\InvalidNumberValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\MessageItemInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
 
 class InvoicItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected ?string $buyerOrderNumber = null;
 
@@ -303,15 +304,7 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
             'supplierAccountNumber',
             'idBuyerDepartmentToReceiveDocuments',
         ];
-
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException('item.'.$property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
+        $this->setStringProperties($stringProperties, $data, isItem: true);
 
         if (isset($data['buyerOrderCreationDateTime']) && $data['buyerOrderCreationDateTime']) {
             $this->buyerOrderCreationDateTime = Utils::stringToDateTime((string) $data['buyerOrderCreationDateTime'], 'item.buyerOrderCreationDateTime');
@@ -334,7 +327,6 @@ class InvoicItem implements MessageItemInterface, JsonSerializable
             $this->netAmountWithVat = (float) $data['netAmountWithVat'];
         }
     }
-
 
     /**
      * @return array<string, mixed>

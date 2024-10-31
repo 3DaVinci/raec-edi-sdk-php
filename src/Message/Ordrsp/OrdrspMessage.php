@@ -7,18 +7,17 @@ namespace RaecEdiSDK\Message\Ordrsp;
 
 use DateTimeImmutable;
 use JsonSerializable;
-use RaecEdiSDK\Exception\InvalidBooleanValueException;
 use RaecEdiSDK\Exception\InvalidNumberValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
-use function _PHPStan_156ee64ba\RingCentral\Psr7\str;
 
 class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected string $supplierOrderNumber;
 
@@ -332,29 +331,14 @@ class OrdrspMessage extends AbstractMessage implements MessageInterface, JsonSer
             'supplierComment',
             'currencyIsoCode',
         ];
-
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException($property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
+        $this->setStringProperties($stringProperties, $data);
 
         $boolProperties = [
             'selfDelivery',
             'shipmentAfterCompleteSet',
             'combineShipmentWithOtherOrders',
         ];
-        foreach ($boolProperties as $property) {
-            if (isset($data[$property]) && $data[$property] !== '') {
-                if (!in_array($data[$property], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
-                    throw new InvalidBooleanValueException($property, (string) $data[$property]);
-                }
-                $this->$property = (bool) $data[$property];
-            }
-        }
+        $this->setBooleanProperties($boolProperties, $data);
 
         $floatProperties = [
             'totalNetAmount',

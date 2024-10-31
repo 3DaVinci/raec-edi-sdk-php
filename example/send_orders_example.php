@@ -45,6 +45,7 @@ $raecEdiClient = new RaecEdiClient(
 //    'buyerOrderNumber' => '2024-ЭК00-001052',
 //    'buyerOrderCreationDateTime' => '2024.12.10 12:12:12',
 //    'shipTo' => 'Склад №3',
+//    'selfDelivery' => 'false',
 //    'items' => [
 //        [
 //            'internalSupplierCode' => 'CKK10',
@@ -56,8 +57,9 @@ $raecEdiClient = new RaecEdiClient(
 //try {
 //    $ordersMessage = \RaecEdiSDK\Message\Orders\OrdersFactory::create($data);
 //} catch (\RaecEdiSDK\Exception\InvalidValueException $e) {
-//
+//    var_dump($e->getMessage());
 //}
+
 
 try {
     /** @var SendDocumentResponse $responseDocument */

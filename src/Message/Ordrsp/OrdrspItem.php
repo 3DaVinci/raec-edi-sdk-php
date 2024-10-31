@@ -7,17 +7,16 @@ namespace RaecEdiSDK\Message\Ordrsp;
 
 use DateTimeImmutable;
 use JsonSerializable;
-use RaecEdiSDK\Exception\InvalidBooleanValueException;
 use RaecEdiSDK\Exception\InvalidNumberValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
-use RaecEdiSDK\Message\MessageInterface;
 use RaecEdiSDK\Message\MessageItemInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
 
 class OrdrspItem implements MessageItemInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected ?string $buyerLineNumber = null;
 
@@ -260,25 +259,10 @@ class OrdrspItem implements MessageItemInterface, JsonSerializable
             'supplierProductName',
             'supplierLineComment',
         ];
-
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException('item.'.$property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
+        $this->setStringProperties($stringProperties, $data, isItem: true);
 
         $boolProperties = ['dividedIntoSeveralDeliveries', 'supplierEstimatedDeliveryDateNotSpecified'];
-        foreach ($boolProperties as $property) {
-            if (isset($data[$property]) && $data[$property] !== '') {
-                if (!in_array($data[$property], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
-                    throw new InvalidBooleanValueException('item.'.$property, (string) $data[$property]);
-                }
-                $this->$property = (bool) $data[$property];
-            }
-        }
+        $this->setBooleanProperties($boolProperties, $data, isItem: true);
 
         if (isset($data['brandCode']) && $data['brandCode']) {
             if (!is_numeric($data['brandCode'])) {

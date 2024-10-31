@@ -6,10 +6,9 @@ declare(strict_types=1);
 namespace RaecEdiSDK\Message\Invoic;
 
 use DateTimeImmutable;
-use RaecEdiSDK\Exception\InvalidBooleanValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use JsonSerializable;
 use RaecEdiSDK\Utils;
@@ -17,6 +16,7 @@ use RaecEdiSDK\Utils;
 class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected string $updNumber;
 
@@ -370,22 +370,9 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
             'supplierContactManagerEmail',
             'supplierContactManagerPhone',
         ];
+        $this->setStringProperties($stringProperties, $data);
 
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException($property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
-
-        if (isset($data['paidByFactoring']) && $data['paidByFactoring'] !== '') {
-            if (!in_array($data['paidByFactoring'], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
-                throw new InvalidBooleanValueException('paidByFactoring', (string) $data['paidByFactoring']);
-            }
-            $this->paidByFactoring = (bool) $data['paidByFactoring'];
-        }
+        $this->setBooleanProperties(['paidByFactoring'], $data);
 
         $dateProperties = ['ttnDate', 'dateOfPayment'];
         foreach ($dateProperties as $property) {

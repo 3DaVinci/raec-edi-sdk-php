@@ -6,7 +6,7 @@ use DateTime;
 
 interface MessageInterface
 {
-    public const ALLOW_BOOLEAN_VALUES = [true, false, 1, 0, '1', '0'];
+    public const ALLOW_BOOLEAN_VALUES = [true, false, 1, 0, '1', '0', 'true', 'false'];
 
     public const TYPE_ORDERS = 'ORDERS';
     public const TYPE_ORDRSP = 'ORDRSP';

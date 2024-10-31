@@ -7,16 +7,16 @@ namespace RaecEdiSDK\Message\Orders;
 
 use DateTimeImmutable;
 use JsonSerializable;
-use RaecEdiSDK\Exception\InvalidBooleanValueException;
-use RaecEdiSDK\Exception\InvalidStringValueException;
 use RaecEdiSDK\Message\AbstractMessage;
 use RaecEdiSDK\Message\MessageInterface;
+use RaecEdiSDK\Message\MessagePopulateTrait;
 use RaecEdiSDK\Message\ObjectSerializeTrait;
 use RaecEdiSDK\Utils;
 
 class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSerializable
 {
     use ObjectSerializeTrait;
+    use MessagePopulateTrait;
 
     protected string $buyerOrderNumber;
 
@@ -228,29 +228,14 @@ class OrdersMessage extends AbstractMessage implements MessageInterface, JsonSer
             'contractNumber',
             'buyerComment',
         ];
-
-        foreach ($stringProperties as $property) {
-            if (isset($data[$property]) && $data[$property]) {
-                if (!is_scalar($data[$property])) {
-                    throw new InvalidStringValueException($property, gettype($data[$property]));
-                }
-                $this->$property = (string) $data[$property];
-            }
-        }
+        $this->setStringProperties($stringProperties, $data);
 
         $boolProperties = [
             'selfDelivery',
             'shipmentAfterCompleteSet',
             'combineShipmentWithOtherOrders',
         ];
-        foreach ($boolProperties as $property) {
-            if (isset($data[$property]) && $data[$property] !== '') {
-                if (!in_array($data[$property], MessageInterface::ALLOW_BOOLEAN_VALUES, true)) {
-                    throw new InvalidBooleanValueException($property, (string) $data[$property]);
-                }
-                $this->$property = (bool) $data[$property];
-            }
-        }
+        $this->setBooleanProperties($boolProperties, $data);
     }
 
     /**
