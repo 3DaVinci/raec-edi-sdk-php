@@ -11,11 +11,13 @@ use RaecEdiSDK\Exception\ValidateRequestException;
 use RaecEdiSDK\Message\MessageInterface;
 use RaecEdiSDK\Request\GetDocumentRequest;
 use RaecEdiSDK\Request\ReceiveDocumentsRequest;
+use RaecEdiSDK\Request\ReceiveOfficesRequest;
 use RaecEdiSDK\Request\ReceiveWarehousesRequest;
 use RaecEdiSDK\Request\RequestInterface;
 use RaecEdiSDK\Request\SendDocumentRequest;
 use RaecEdiSDK\Response\GetDocumentResponse;
 use RaecEdiSDK\Response\ReceiveDocumentsResponse;
+use RaecEdiSDK\Response\ReceiveOfficesResponse;
 use RaecEdiSDK\Response\ReceiveWarehousesResponse;
 use RaecEdiSDK\Response\ResponseInterface;
 use RaecEdiSDK\Response\SendDocumentResponse;
@@ -94,6 +96,21 @@ class RaecEdiClient
         $request = $this->createRequest(
             ReceiveWarehousesRequest::class,
             ReceiveWarehousesResponse::class,
+            ['page' => $page, 'perPage' => $perPage, 'dateFrom' => $dateFrom]
+        );
+
+        return $request->send();
+    }
+
+    public function getOffices(
+        int $page = 1,
+        int $perPage = 100,
+        ?string $dateFrom = null
+    ): ResponseInterface
+    {
+        $request = $this->createRequest(
+            ReceiveOfficesRequest::class,
+            ReceiveOfficesResponse::class,
             ['page' => $page, 'perPage' => $perPage, 'dateFrom' => $dateFrom]
         );
 
