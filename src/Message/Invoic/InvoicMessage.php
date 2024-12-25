@@ -377,7 +377,7 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         $dateProperties = ['ttnDate', 'dateOfPayment'];
         foreach ($dateProperties as $property) {
             if (isset($data[$property]) && $data[$property]) {
-                $this->ttnDate = Utils::stringToDateTime((string) $data[$property], $property);
+                $this->$property = Utils::stringToDate((string) $data[$property], $property);
             }
         }
     }
