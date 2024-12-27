@@ -1,0 +1,30 @@
+{
+  "documentType": "ORDERS",
+  "buyerOrderCreationDateTime": "2024.08.06 15:01:17",
+  "buyerOrderNumber": "2024-ЭК00-001052",
+  "supplierGLN": "4659281011463",
+  "buyerGLN": "4659217235604",
+  "shipTo": "Склад №3",
+  "combineShipmentWithOtherOrders": 1,
+  "buyerProjectNumber": "p-022",
+  "buyerContactManager": "Антон",
+  "buyerContactManagerEmail": "anton@example.com",
+  "buyerContactManagerPhone": "+7952 548 11 22",
+  "isTest": false,
+  "items": [
+    {
+      "internalSupplierCode": "CKK10",
+      "buyerRequestedQuantity": 20,
+      "buyerRequestedDeliveryDate": "2024.10.05"
+    },
+    {
+      "internalSupplierCode": "LLE-A60-7-230-40-E27",
+      "buyerRequestedQuantity": 7,
+      "buyerUnitOfMeasure": "шт",
+      "buyerProductName": "IEK Лампа светодиодная ECO A60 шар 7Вт 230В 4000К E27 (10/100)",
+      "brandName": "IEK",
+      "buyerMultiplicity": 1,
+      "buyerRequestedDeliveryDate": "2024-10-10"
+    }
+  ]
+}

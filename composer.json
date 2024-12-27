@@ -1,7 +1,7 @@
 {
   "name": "3davinci/raec-edi-sdk-php",
   "minimum-stability": "stable",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "RAEC EDI service SDK for PHP - Use RAEC EDI Service in your PHP project",
   "keywords": ["raec","edi","sdk"],
   "type": "library",
@@ -20,7 +20,8 @@
     "php": ">=8.1",
     "ext-json": "*",
     "psr/http-message": "^2.0",
-    "symfony/http-client": "^6.0|^7.0"
+    "symfony/http-client": "^6.0|^7.0",
+    "symfony/polyfill-php83": "^1.31"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.10"
