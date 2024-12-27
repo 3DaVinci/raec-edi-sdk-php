@@ -14,12 +14,14 @@ use RaecEdiSDK\Request\ReceiveDocumentsRequest;
 use RaecEdiSDK\Request\ReceiveOfficesRequest;
 use RaecEdiSDK\Request\ReceiveWarehousesRequest;
 use RaecEdiSDK\Request\RequestInterface;
+use RaecEdiSDK\Request\SendConfirmRequest;
 use RaecEdiSDK\Request\SendDocumentRequest;
 use RaecEdiSDK\Response\GetDocumentResponse;
 use RaecEdiSDK\Response\ReceiveDocumentsResponse;
 use RaecEdiSDK\Response\ReceiveOfficesResponse;
 use RaecEdiSDK\Response\ReceiveWarehousesResponse;
 use RaecEdiSDK\Response\ResponseInterface;
+use RaecEdiSDK\Response\SendConfirmResponse;
 use RaecEdiSDK\Response\SendDocumentResponse;
 
 use Symfony\Component\HttpClient\HttpClient;
@@ -65,6 +67,14 @@ class RaecEdiClient
             GetDocumentResponse::class,
             ['id' => $id]
         );
+
+        return $request->send();
+    }
+
+    public function sendConfirm(string $documentId): ResponseInterface
+    {
+        $request = new SendConfirmRequest($this->httpClient, SendConfirmResponse::class);
+        $request->initialize($this->credentials, ['documentId' => $documentId]);
 
         return $request->send();
     }
