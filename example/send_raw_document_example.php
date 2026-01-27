@@ -24,7 +24,8 @@ try {
 
 
 $raecEdiClient = new RaecEdiClient(
-    new Credentials(email: 'buyer@3davinci.ru', password: '040555')
+    new Credentials(email: 'buyer@3davinci.ru', password: '040555'),
+    ['baseUri' => 'http://localhost:8080/api/v1/']
 );
 
 

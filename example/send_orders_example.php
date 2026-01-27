@@ -35,31 +35,33 @@ $ordersItem
 $ordersMessage->addItem($ordersItem);
 
 $raecEdiClient = new RaecEdiClient(
-    new Credentials(email: 'buyer@3davinci.ru', password: '040555')
+    new Credentials(email: 'buyer@3davinci.ru', password: '040555'),
+    ['baseUri' => 'http://localhost:8080/api/v1/']
 );
 
 // Или создание из массива с помощью фабрики
-//$data = [
-//    'supplierGLN' => '6971267350013',
-//    'buyerGLN' => '1234023894117',
-//    'buyerOrderNumber' => '2024-ЭК00-001052',
-//    'buyerOrderCreationDateTime' => '2024.12.10 12:12:12',
-//    'shipTo' => 'Склад №3',
-//    'selfDelivery' => 'false',
-//    'items' => [
-//        [
-//            'internalSupplierCode' => 'CKK10',
-//            'buyerRequestedQuantity' => 20,
-//            'buyerRequestedDeliveryDate' => '2024-10-15'
-//        ]
-//    ]
-//];
-//try {
-//    $ordersMessage = \RaecEdiSDK\Message\Orders\OrdersFactory::create($data);
-//} catch (\RaecEdiSDK\Exception\InvalidValueException $e) {
-//    var_dump($e->getMessage());
-//}
-
+$data = [
+    'supplierGLN' => '4659281011463',
+    'buyerGLN' => '4659217235604',
+    'buyerOrderNumber' => '2024-ЭК00-001052',
+    'buyerOrderCreationDateTime' => '2024.12.10 12:12:12',
+    'shipTo' => 'Склад №3',
+    'selfDelivery' => 'false',
+    "shipmentAfterCompleteSet" => "false",
+    "combineShipmentWithOtherOrders" => "false",
+    'items' => [
+        [
+            'internalSupplierCode' => 'CKK10',
+            'buyerRequestedQuantity' => 20,
+            'buyerRequestedDeliveryDate' => '2024-10-15'
+        ]
+    ]
+];
+try {
+    $ordersMessage = \RaecEdiSDK\Message\Orders\OrdersFactory::create($data);
+} catch (\RaecEdiSDK\Exception\InvalidValueException $e) {
+    var_dump($e->getMessage());
+}
 
 try {
     /** @var SendDocumentResponse $responseDocument */

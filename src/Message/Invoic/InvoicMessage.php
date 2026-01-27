@@ -76,6 +76,10 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
 
     protected ?string $supplierContactManagerPhone = null;
 
+    protected float $invoiceNetAmountWithVat;
+
+    protected float $invoiceNetAmount;
+
     public function __construct(
         string $supplierGLN,
         string $buyerGLN,
@@ -93,6 +97,8 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         string $buyerInn,
         string $buyerKpp,
         string $currencyIsoCode,
+        float $invoiceNetAmountWithVat,
+        float $invoiceNetAmount,
         bool $isTest = self::DEFAULT_IS_TEST_VALUE
     )
     {
@@ -110,6 +116,8 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
         $this->buyerInn = $buyerInn;
         $this->buyerKpp = $buyerKpp;
         $this->currencyIsoCode = $currencyIsoCode;
+        $this->invoiceNetAmountWithVat = $invoiceNetAmountWithVat;
+        $this->invoiceNetAmount = $invoiceNetAmount;
 
         parent::__construct(self::TYPE_INVOIC, $supplierGLN, $buyerGLN, $isTest);
     }
@@ -348,6 +356,16 @@ class InvoicMessage extends AbstractMessage implements MessageInterface, JsonSer
     public function getSupplierContactManagerPhone(): ?string
     {
         return $this->supplierContactManagerPhone;
+    }
+
+    public function getInvoiceNetAmountWithVat(): float
+    {
+        return $this->invoiceNetAmountWithVat;
+    }
+
+    public function getInvoiceNetAmount(): float
+    {
+        return $this->invoiceNetAmount;
     }
 
     /**

@@ -5,12 +5,13 @@
   "supplierGLN": "4659281011463",
   "buyerGLN": "4659217235604",
   "shipTo": "Склад №3",
-  "combineShipmentWithOtherOrders": 1,
   "buyerProjectNumber": "p-022",
   "buyerContactManager": "Антон",
   "buyerContactManagerEmail": "anton@example.com",
   "buyerContactManagerPhone": "+7952 548 11 22",
   "isTest": false,
+  "shipmentAfterCompleteSet": "false",
+  "combineShipmentWithOtherOrders": "false",
   "items": [
     {
       "internalSupplierCode": "CKK10",

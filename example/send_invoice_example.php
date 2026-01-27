@@ -30,6 +30,8 @@ $invoicMessage = new InvoicMessage(
     buyerInn: '123452154121',
     buyerKpp: '123123123',
     currencyIsoCode: 'RUS',
+    invoiceNetAmountWithVat: 2500.00,
+    invoiceNetAmount: 2000.00,
     isTest: true
 );
 $invoicMessage->setPaidByFactoring(true);
