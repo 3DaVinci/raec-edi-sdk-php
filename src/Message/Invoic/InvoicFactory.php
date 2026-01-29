@@ -37,6 +37,8 @@ abstract class InvoicFactory implements MessageFactoryInterface
             $data['buyerInn'],
             $data['buyerKpp'],
             $data['currencyIsoCode'],
+            (float) $data['invoiceNetAmountWithVat'],
+            (float) $data['invoiceNetAmount'],
             $data['isTest'] ?? AbstractMessage::DEFAULT_IS_TEST_VALUE
         );
 
